@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - EnergyWise</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.svg" alt="Energy Wise Logo">
+                <h1>Energy Wise</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span>Welcome, Rahul</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown">
+                    <ul>
+                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-home"></i> Overview</a>
+                    </li>
+                    <li>
+                        <a href="rooms.html"><i class="fas fa-door-open"></i> Rooms</a>
+                    </li>
+                    <li>
+                        <a href="appliances.html"><i class="fas fa-plug"></i> Appliances</a>
+                    </li>
+                    <li>
+                        <a href="bills.html"><i class="fas fa-file-invoice"></i> Bills</a>
+                    </li>
+                    <li>
+                        <a href="mcb-mapping.html"><i class="fas fa-sitemap"></i> MCB Mapping</a>
+                    </li>
+                    <li>
+                        <a href="reports.html"><i class="fas fa-chart-pie"></i> Reports</a>
+                    </li>
+                    <li>
+                        <a href="savings.html"><i class="fas fa-piggy-bank"></i> Savings</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li>
+                        <a href="solar.html"><i class="fas fa-sun"></i> Solar</a>
+                    </li>
+                    <li class="active">
+                        <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                    </li>
+                    <li>
+                        <a href="simulation.html"><i class="fas fa-calculator"></i> Simulation</a>
+                    </li>
+                    <li>
+                        <a href="gamification.html"><i class="fas fa-award"></i> Rewards</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="accessibility-controls">
+                    <button onclick="toggleHighContrast()" title="Toggle High Contrast">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                    <button onclick="toggleLargeText()" title="Toggle Large Text">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button onclick="toggleLanguage()" title="Change Language">
+                        <i class="fas fa-language"></i>
+                    </button>
+                </div>
+                <div class="help-support">
+                    <a href="support.html" title="Help & Support">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="dashboard-content">
+            <section id="community" class="dashboard-section active">
+                <div class="community-container">
+                    <div class="community-header">
+                        <h1>EnergyWise Community</h1>
+                        <p>Connect with other users, share tips, and participate in energy-saving challenges.</p>
+                    </div>
+
+                    <!-- Community Features Section -->
+                    <div class="community-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3>Monthly Challenges</h3>
+                            <p>Participate in energy-saving contests with your neighbors and win rewards.</p>
+                            <a href="#" class="btn btn-primary">Join Challenge</a>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Leaderboards</h3>
+                            <p>See how your energy-saving efforts compare to others in your community.</p>
+                            <a href="#" class="btn btn-primary">View Rankings</a>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>Discussion Forums</h3>
+                            <p>Share tips, ask questions, and learn from other EnergyWise users.</p>
+                            <a href="#" class="btn btn-primary">Join Discussions</a>
+                        </div>
+                    </div>
+
+                    <!-- Current Challenge Section -->
+                    <div class="current-challenge">
+                        <h2>Current Challenge: <span>Winter Energy Savers</span></h2>
+                        <div class="challenge-details">
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 68%;"></div>
+                                </div>
+                                <p>Challenge ends in <span class="countdown">12 days</span></p>
+                            </div>
+                            <div class="challenge-stats">
+                                <div class="stat-item">
+                                    <p class="stat-number">328</p>
+                                    <p class="stat-label">Participants</p>
+                                </div>
+                                <div class="stat-item">
+                                    <p class="stat-number">142,560</p>
+                                    <p class="stat-label">KWh Saved</p>
+                                </div>
+                                <div class="stat-item">
+                                    <p class="stat-number">₹35,640</p>
+                                    <p class="stat-label">Money Saved</p>
+                                </div>
+                                <div class="stat-item">
+                                    <p class="stat-number">85.3</p>
+                                    <p class="stat-label">CO₂ Reduced (kg)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Section -->
+                    <div class="leaderboard-section">
+                        <h2>Community Leaderboard</h2>
+                        <div class="leaderboard">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>User</th>
+                                        <th>Energy Saved (KWh)</th>
+                                        <th>Money Saved (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="top-rank">
+                                        <td class="rank">1</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=ffd700&color=000" alt="Priya Sharma">
+                                            <span>Priya Sharma</span>
+                                        </td>
+                                        <td>1,245</td>
+                                        <td>3,112</td>
+                                    </tr>
+                                    <tr class="top-rank">
+                                        <td class="rank">2</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Rajiv+Patel&background=c0c0c0&color=000" alt="Rajiv Patel">
+                                            <span>Rajiv Patel</span>
+                                        </td>
+                                        <td>986</td>
+                                        <td>2,465</td>
+                                    </tr>
+                                    <tr class="top-rank">
+                                        <td class="rank">3</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Anu+Thomas&background=cd7f32&color=fff" alt="Anu Thomas">
+                                            <span>Anu Thomas</span>
+                                        </td>
+                                        <td>873</td>
+                                        <td>2,182</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rank">4</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Vikram+Singh&background=2ecc71&color=fff" alt="Vikram Singh">
+                                            <span>Vikram Singh</span>
+                                        </td>
+                                        <td>752</td>
+                                        <td>1,880</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rank">5</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Meera+Nair&background=2ecc71&color=fff" alt="Meera Nair">
+                                            <span>Meera Nair</span>
+                                        </td>
+                                        <td>689</td>
+                                        <td>1,722</td>
+                                    </tr>
+                                    <tr class="your-rank">
+                                        <td class="rank">42</td>
+                                        <td class="user">
+                                            <img src="https://ui-avatars.com/api/?name=Rahul+Kumar&background=e74c3c&color=fff" alt="Rahul Kumar">
+                                            <span>You</span>
+                                        </td>
+                                        <td>324</td>
+                                        <td>810</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Community Tips Section -->
+                    <div class="community-tips">
+                        <h2>Community Tips & Insights</h2>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <div class="tip-header">
+                                    <img src="https://ui-avatars.com/api/?name=Anil+Kumar&background=2ecc71&color=fff" alt="Anil Kumar">
+                                    <div class="tip-author">
+                                        <p>Anil Kumar</p>
+                                        <p>3 days ago</p>
+                                    </div>
+                                </div>
+                                <h3>Winter Heating Hack</h3>
+                                <p>Set your geyser temperature to 50°C instead of 60°C - saves 10-15% energy without noticeable difference in hot water.</p>
+                                <div class="tip-stats">
+                                    <button class="like-btn"><i class="far fa-thumbs-up"></i> 48</button>
+                                    <button class="comment-btn"><i class="far fa-comment"></i> 12</button>
+                                </div>
+                            </div>
+
+                            <div class="tip-card">
+                                <div class="tip-header">
+                                    <img src="https://ui-avatars.com/api/?name=Sneha+Reddy&background=2ecc71&color=fff" alt="Sneha Reddy">
+                                    <div class="tip-author">
+                                        <p>Sneha Reddy</p>
+                                        <p>1 week ago</p>
+                                    </div>
+                                </div>
+                                <h3>Smart Lighting Strategy</h3>
+                                <p>Replace all your CFL bulbs with LED lights in high-usage areas first. I saved ₹1200/month after doing this throughout my home.</p>
+                                <div class="tip-stats">
+                                    <button class="like-btn"><i class="far fa-thumbs-up"></i> 76</button>
+                                    <button class="comment-btn"><i class="far fa-comment"></i> 18</button>
+                                </div>
+                            </div>
+
+                            <div class="tip-card">
+                                <div class="tip-header">
+                                    <img src="https://ui-avatars.com/api/?name=Ravi+Menon&background=2ecc71&color=fff" alt="Ravi Menon">
+                                    <div class="tip-author">
+                                        <p>Ravi Menon</p>
+                                        <p>2 weeks ago</p>
+                                    </div>
+                                </div>
+                                <h3>Refrigerator Optimization</h3>
+                                <p>Keep your fridge temperature at 4°C and freezer at -18°C for optimal efficiency. Clean the coils every 6 months!</p>
+                                <div class="tip-stats">
+                                    <button class="like-btn"><i class="far fa-thumbs-up"></i> 53</button>
+                                    <button class="comment-btn"><i class="far fa-comment"></i> 9</button>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary">View All Tips</a>
+                    </div>
+
+                    <!-- Community Events Section -->
+                    <div class="community-events">
+                        <h2>Upcoming Events</h2>
+                        <div class="events-grid">
+                            <div class="event-card">
+                                <div class="event-date">
+                                    <p class="event-day">15</p>
+                                    <p class="event-month">Mar</p>
+                                </div>
+                                <div class="event-details">
+                                    <h3>Energy Conservation Workshop</h3>
+                                    <p><i class="far fa-clock"></i> 6:00 PM - 8:00 PM</p>
+                                    <p><i class="far fa-map-marker"></i> Virtual Event</p>
+                                    <a href="#" class="btn btn-outline">Register</a>
+                                </div>
+                            </div>
+
+                            <div class="event-card">
+                                <div class="event-date">
+                                    <p class="event-day">22</p>
+                                    <p class="event-month">Mar</p>
+                                </div>
+                                <div class="event-details">
+                                    <h3>Community Solar Panel Installation</h3>
+                                    <p><i class="far fa-clock"></i> 10:00 AM - 2:00 PM</p>
+                                    <p><i class="far fa-map-marker"></i> Bangalore Central Park</p>
+                                    <a href="#" class="btn btn-outline">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notifications -->
+    <div class="notification-container">
+        <div class="notification-dropdown">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="notification-close">×</button>
+            </div>
+            <div class="notification-list">
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>You've moved up 5 positions in the Winter Energy Savers challenge!</p>
+                        <p class="notification-time">10 minutes ago</p>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>Your weekly energy report is ready. You saved 12% more than last week!</p>
+                        <p class="notification-time">1 hour ago</p>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>Sneha Reddy commented on your tip about LED lighting.</p>
+                        <p class="notification-time">3 hours ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-footer">
+                <a href="notifications.html">View All Notifications</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Menu -->
+    <div class="accessibility-menu">
+        <div class="accessibility-dropdown">
+            <div class="accessibility-header">
+                <h3>Accessibility Options</h3>
+                <button class="accessibility-close">×</button>
+            </div>
+            <div class="accessibility-options">
+                <div class="option-group">
+                    <label for="high-contrast">High Contrast Mode</label>
+                    <input type="checkbox" id="high-contrast" onclick="toggleHighContrast()">
+                </div>
+                <div class="option-group">
+                    <label for="large-text">Large Text Mode</label>
+                    <input type="checkbox" id="large-text" onclick="toggleLargeText()">
+                </div>
+                <div class="option-group">
+                    <label for="reduce-motion">Reduce Motion</label>
+                    <input type="checkbox" id="reduce-motion" onclick="toggleReduceMotion()">
+                </div>
+                <div class="option-group">
+                    <label for="screen-reader">Screen Reader Support</label>
+                    <input type="checkbox" id="screen-reader" onclick="toggleScreenReader()">
+                </div>
+                <div class="option-group">
+                    <label for="language-select">Language</label>
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="kn">Kannada</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="EnergyWise Logo">
+                        <span>EnergyWise</span>
+                    </div>
+                    <p>Smart energy management solution to help you save money and reduce your carbon footprint.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="impact.html">Impact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Get the App</h4>
+                    <div class="app-links">
+                        <a href="#" aria-label="Download on the App Store">
+                            <img src="https://via.placeholder.com/150x40?text=App+Store" alt="App Store">
+                        </a>
+                        <a href="#" aria-label="Get it on Google Play">
+                            <img src="https://via.placeholder.com/150x40?text=Google+Play" alt="Google Play">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EnergyWise. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/community.js"></script>
+    <script src="js/accessibility.js"></script>
+</body>
+</html>
