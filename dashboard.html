@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Management - EnergyWise</title>
+    <title>Dashboard - Energy Wise</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/bills.css">
-    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="css/ui-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -23,7 +22,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
                     <li><a href="features.html">Features</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="impact.html">Impact</a></li>
@@ -56,7 +55,7 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul>
-                    <li>
+                    <li class="active">
                         <a href="dashboard.html"><i class="fas fa-home"></i> Overview</a>
                     </li>
                     <li>
@@ -65,7 +64,7 @@
                     <li>
                         <a href="appliances.html"><i class="fas fa-plug"></i> Appliances</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="bills.html"><i class="fas fa-file-invoice"></i> Bills</a>
                     </li>
                     <li>
@@ -116,293 +115,589 @@
 
         <!-- Main Dashboard Content -->
         <main class="dashboard-content">
-            <section id="bills" class="dashboard-section active">
-                <div class="bills-container">
-            <div class="bills-header">
-                <h1>Bill Management</h1>
-                <p>Upload, analyze, and track your energy bills to gain insights and save money</p>
-            </div>
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <div class="date-filter">
+                        <select id="time-period">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                </div>
 
-            <!-- Bill Upload Area -->
-            <div class="bill-upload-area">
-                <div class="upload-container">
-                    <div class="upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <h3>Upload Your Energy Bill</h3>
-                    <p>Drag & drop your bill image or PDF here</p>
-                    <p>or click to browse files</p>
-                    <div class="supported-formats">
-                        Supported formats: JPG, PNG, PDF
-                    </div>
-                    <input type="file" id="bill-file-input" accept="image/*,.pdf" hidden>
-                </div>
-            </div>
-            <!-- OCR Processing Container -->
-            <div class="ocr-processing-container" style="display: none;">
-                <div class="processing-header">
-                    <h3>Processing Your Bill</h3>
-                    <p>Using OCR technology to extract information...</p>
-                </div>
-                <div class="processing-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <div class="progress-text">0%</div>
-                </div>
-            </div>
-
-            <!-- OCR Results Container -->
-            <div class="ocr-results-container" style="display: none;">
-                <div class="bill-preview">
-                    <div class="bill-image">
-                        <img src="" alt="Uploaded Bill">
-                    </div>
-                    <div class="extracted-data">
-                        <div class="results-header">
-                            <h3>Extracted Bill Data</h3>
-                            <div class="accuracy-meter high">High Confidence</div>
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <form class="bill-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="bill-number">Bill Number</label>
-                                    <input type="text" id="bill-number" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bill-date">Bill Date</label>
-                                    <input type="date" id="bill-date" readonly>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="bill-amount">Total Amount</label>
-                                    <input type="number" id="bill-amount" step="0.01" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="energy-consumption">Energy Consumption (kWh)</label>
-                                    <input type="number" id="energy-consumption" readonly>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="billing-period">Billing Period</label>
-                                    <input type="text" id="billing-period" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="utility-provider">Utility Provider</label>
-                                    <input type="text" id="utility-provider" readonly>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="edit-bill-btn">
-                                    <i class="fas fa-edit"></i> Edit Details
-                                </button>
-                                <button type="button" class="save-bill-btn">
-                                    <i class="fas fa-save"></i> Save Bill
-                                </button>
-                                <button type="button" class="reset-btn">
-                                    <i class="fas fa-undo"></i> Upload New Bill
-                                </button>
-                            </div>
-                        </form>
+                        <div class="stat-info">
+                            <h3>Total Usage</h3>
+                            <p class="stat-value">324 kWh</p>
+                            <p class="stat-comparison decrease">
+                                <i class="fas fa-arrow-down"></i> 12% vs last month
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Cost</h3>
+                            <p class="stat-value">₹2,592</p>
+                            <p class="stat-comparison decrease">
+                                <i class="fas fa-arrow-down"></i> 12% vs last month
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>CO₂ Saved</h3>
+                            <p class="stat-value">45 kg</p>
+                            <p class="stat-comparison increase">
+                                <i class="fas fa-arrow-up"></i> 8% vs last month
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Money Saved</h3>
+                            <p class="stat-value">₹350</p>
+                            <p class="stat-comparison increase">
+                                <i class="fas fa-arrow-up"></i> 15% vs last month
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-                <!-- Bill History Section -->
-                <section class="bill-history-section">
-                    <div class="card">
-                        <h2><i class="fas fa-history"></i> Bill History</h2>
-                        <div class="bill-history-filters">
-                            <div class="form-group">
-                                <label for="historyYear">Year</label>
-                                <select id="historyYear" class="form-control">
-                                    <option value="2023">2023</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="historySort">Sort By</label>
-                                <select id="historySort" class="form-control">
-                                    <option value="date-desc">Date (Newest)</option>
-                                    <option value="date-asc">Date (Oldest)</option>
-                                    <option value="amount-desc">Amount (Highest)</option>
-                                    <option value="amount-asc">Amount (Lowest)</option>
-                                </select>
-                            </div>
+                <!-- Usage Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Energy Usage Trends</h3>
+                        <div class="chart-controls">
+                            <button class="active" data-chart="usage">Usage</button>
+                            <button data-chart="cost">Cost</button>
                         </div>
-                        <div class="bill-history-list" id="billHistoryList">
-                            <div class="bill-history-item">
-                                <div class="history-item-date">
-                                    <span class="month">JUN</span>
-                                    <span class="year">2023</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Room & Appliance Usage -->
+                <div class="usage-breakdown">
+                    <div class="room-usage">
+                        <div class="breakdown-header">
+                            <h3>Room-wise Usage</h3>
+                            <a href="#rooms" class="view-all">View All</a>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="roomChart"></canvas>
+                        </div>
+                        <div class="top-rooms">
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Living Room</span>
+                                    <span class="item-value">98 kWh</span>
                                 </div>
-                                <div class="history-item-details">
-                                    <h4>June 2023 Electricity Bill</h4>
-                                    <p>Billing Period: 01/06/2023 - 30/06/2023</p>
-                                </div>
-                                <div class="history-item-consumption">
-                                    <span class="consumption-value">320 kWh</span>
-                                    <div class="consumption-indicator high"></div>
-                                </div>
-                                <div class="history-item-amount">$78.45</div>
-                                <div class="history-item-actions">
-                                    <button class="icon-btn" aria-label="View Bill">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="icon-btn" aria-label="Download Bill">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="bill-history-item">
-                                <div class="history-item-date">
-                                    <span class="month">MAY</span>
-                                    <span class="year">2023</span>
-                                </div>
-                                <div class="history-item-details">
-                                    <h4>May 2023 Electricity Bill</h4>
-                                    <p>Billing Period: 01/05/2023 - 31/05/2023</p>
-                                </div>
-                                <div class="history-item-consumption">
-                                    <span class="consumption-value">285 kWh</span>
-                                    <div class="consumption-indicator medium"></div>
-                                </div>
-                                <div class="history-item-amount">$67.20</div>
-                                <div class="history-item-actions">
-                                    <button class="icon-btn" aria-label="View Bill">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="icon-btn" aria-label="Download Bill">
-                                        <i class="fas fa-download"></i>
-                                    </button>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 30%;"></div>
                                 </div>
                             </div>
-                            <div class="bill-history-item">
-                                <div class="history-item-date">
-                                    <span class="month">APR</span>
-                                    <span class="year">2023</span>
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Kitchen</span>
+                                    <span class="item-value">85 kWh</span>
                                 </div>
-                                <div class="history-item-details">
-                                    <h4>April 2023 Electricity Bill</h4>
-                                    <p>Billing Period: 01/04/2023 - 30/04/2023</p>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 26%;"></div>
                                 </div>
-                                <div class="history-item-consumption">
-                                    <span class="consumption-value">240 kWh</span>
-                                    <div class="consumption-indicator low"></div>
+                            </div>
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Master Bedroom</span>
+                                    <span class="item-value">72 kWh</span>
                                 </div>
-                                <div class="history-item-amount">$58.75</div>
-                                <div class="history-item-actions">
-                                    <button class="icon-btn" aria-label="View Bill">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="icon-btn" aria-label="Download Bill">
-                                        <i class="fas fa-download"></i>
-                                    </button>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 22%;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <!-- Bill Analysis Section -->
-                <section class="bill-analysis-section">
-                    <div class="card">
-                        <h2><i class="fas fa-chart-line"></i> Bill Analysis</h2>
-                        <div class="analysis-tabs">
-                            <button class="analysis-tab active" data-tab="consumption">Consumption</button>
-                            <button class="analysis-tab" data-tab="cost">Cost</button>
-                            <button class="analysis-tab" data-tab="comparison">Comparison</button>
+                    <div class="appliance-usage">
+                        <div class="breakdown-header">
+                            <h3>Appliance-wise Usage</h3>
+                            <a href="#appliances" class="view-all">View All</a>
                         </div>
-                        <div class="analysis-content">
-                            <div class="analysis-tab-content active" id="consumptionTab">
-                                <div class="chart-container">
-                                    <canvas id="consumptionChart"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="applianceChart"></canvas>
+                        </div>
+                        <div class="top-appliances">
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Air Conditioner</span>
+                                    <span class="item-value">120 kWh</span>
                                 </div>
-                                <div class="analysis-insights">
-                                    <h4>Consumption Insights</h4>
-                                    <ul class="insights-list">
-                                        <li>
-                                            <i class="fas fa-arrow-down insight-down"></i>
-                                            <span>Your consumption decreased by 15% compared to last month</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-lightbulb insight-neutral"></i>
-                                            <span>Your average daily consumption is 9.5 kWh</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-exclamation-triangle insight-up"></i>
-                                            <span>Peak usage occurs between 6-9 PM</span>
-                                        </li>
-                                    </ul>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 37%;"></div>
                                 </div>
                             </div>
-                            <div class="analysis-tab-content" id="costTab">
-                                <div class="chart-container">
-                                    <canvas id="costChart"></canvas>
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Refrigerator</span>
+                                    <span class="item-value">65 kWh</span>
                                 </div>
-                                <div class="analysis-insights">
-                                    <h4>Cost Insights</h4>
-                                    <ul class="insights-list">
-                                        <li>
-                                            <i class="fas fa-arrow-down insight-down"></i>
-                                            <span>Your bill amount decreased by 12% compared to last month</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-lightbulb insight-neutral"></i>
-                                            <span>Your average daily cost is $2.25</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-exclamation-triangle insight-up"></i>
-                                            <span>Fixed charges make up 22% of your total bill</span>
-                                        </li>
-                                    </ul>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 20%;"></div>
                                 </div>
                             </div>
-                            <div class="analysis-tab-content" id="comparisonTab">
-                                <div class="chart-container">
-                                    <canvas id="comparisonChart"></canvas>
+                            <div class="top-item">
+                                <div class="item-info">
+                                    <span class="item-name">Water Heater</span>
+                                    <span class="item-value">45 kWh</span>
                                 </div>
-                                <div class="analysis-insights">
-                                    <h4>Comparison Insights</h4>
-                                    <ul class="insights-list">
-                                        <li>
-                                            <i class="fas fa-arrow-down insight-down"></i>
-                                            <span>You use 18% less energy than similar households</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-lightbulb insight-neutral"></i>
-                                            <span>Your energy efficiency rating is A- (above average)</span>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-exclamation-triangle insight-up"></i>
-                                            <span>Your winter consumption is 35% higher than summer</span>
-                                        </li>
-                                    </ul>
+                                <div class="item-progress">
+                                    <div class="progress-bar" style="width: 14%;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <!-- Bill Tips Section -->
-                <section class="bill-tips-section">
-                    <div class="card">
-                        <h2><i class="fas fa-lightbulb"></i> Saving Tips</h2>
+                <!-- Savings Tips & Alerts -->
+                <div class="tips-alerts">
+                    <div class="savings-tips">
+                        <div class="section-header">
+                            <h3>Personalized Savings Tips</h3>
+                        </div>
                         <div class="tips-list">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Switch to LED Lighting</h4>
+                                    <p>Replace your living room lights with LED bulbs to save up to ₹120 per month.</p>
+                                    <div class="tip-actions">
+                                        <button class="btn-small">Implement</button>
+                                        <button class="btn-small btn-outline">Dismiss</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <i class="fas fa-snowflake"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Optimize AC Temperature</h4>
+                                    <p>Setting your AC to 24°C instead of 22°C can save up to 15% on cooling costs.</p>
+                                    <div class="tip-actions">
+                                        <button class="btn-small">Implement</button>
+                                        <button class="btn-small btn-outline">Dismiss</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alerts">
+                        <div class="section-header">
+                            <h3>Recent Alerts</h3>
+                        </div>
+                        <div class="alerts-list">
+                            <div class="alert-card warning">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>High Usage Detected</h4>
+                                    <p>Your living room AC has been running continuously for 8 hours.</p>
+                                    <span class="alert-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="alert-card danger">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>Refrigerator Efficiency Issue</h4>
+                                    <p>Your refrigerator is consuming 20% more energy than normal.</p>
+                                    <span class="alert-time">1 day ago</span>
+                                </div>
+                            </div>
+                            <div class="alert-card info">
+                                <div class="alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h4>Bill Due Reminder</h4>
+                                    <p>Your electricity bill is due in 3 days.</p>
+                                    <span class="alert-time">2 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gamification & Leaderboard -->
+                <div class="gamification">
+                    <div class="section-header">
+                        <h3>Energy Saving Achievements</h3>
+                    </div>
+                    <div class="achievements-leaderboard">
+                        <div class="achievements">
+                            <div class="achievement-cards">
+                                <div class="achievement-card">
+                                    <div class="achievement-icon">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <h4>Energy Saver</h4>
+                                        <p>Reduced energy usage by 10% for 3 consecutive months</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card locked">
+                                    <div class="achievement-icon">
+                                        <i class="fas fa-medal"></i>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <h4>Solar Champion</h4>
+                                        <p>Generated 50% of your energy from solar for a month</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card">
+                                    <div class="achievement-icon">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <h4>Bill Master</h4>
+                                        <p>Kept your bill under ₹2,000 for 6 months</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="view-all-achievements">
+                                <a href="#achievements">View All Achievements</a>
+                            </div>
+                        </div>
+                        <div class="leaderboard">
+                            <h4>Neighborhood Leaderboard</h4>
+                            <div class="leaderboard-list">
+                                <div class="leaderboard-item">
+                                    <div class="rank">1</div>
+                                    <div class="user-avatar">
+                                        <img src="images/avatar-1.svg" alt="User Avatar">
+                                    </div>
+                                    <div class="user-name">Patel Family</div>
+                                    <div class="score">92 points</div>
+                                </div>
+                                <div class="leaderboard-item current-user">
+                                    <div class="rank">2</div>
+                                    <div class="user-avatar">
+                                        <img src="images/avatar-2.svg" alt="User Avatar">
+                                    </div>
+                                    <div class="user-name">Sharma Family</div>
+                                    <div class="score">87 points</div>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <div class="rank">3</div>
+                                    <div class="user-avatar">
+                                        <img src="images/avatar-3.svg" alt="User Avatar">
+                                    </div>
+                                    <div class="user-name">Reddy Family</div>
+                                    <div class="score">81 points</div>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <div class="rank">4</div>
+                                    <div class="user-avatar">
+                                        <img src="images/avatar-4.svg" alt="User Avatar">
+                                    </div>
+                                    <div class="user-name">Singh Family</div>
+                                    <div class="score">75 points</div>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <div class="rank">5</div>
+                                    <div class="user-avatar">
+                                        <img src="images/avatar-5.svg" alt="User Avatar">
+                                    </div>
+                                    <div class="user-name">Kumar Family</div>
+                                    <div class="score">68 points</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rooms Section -->
+            <section id="rooms" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Room Management</h2>
+                </div>
+                <div class="rooms-grid">
+                    <div class="room-card">
+                        <div class="room-header">
+                            <h3>Living Room</h3>
+                            <div class="room-status active">Active</div>
+                        </div>
+                        <div class="room-stats">
+                            <div class="stat">
+                                <i class="fas fa-bolt"></i>
+                                <span>85 kWh</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>24°C</span>
+                            </div>
+                        </div>
+                        <div class="room-devices">
+                            <div class="device-item on">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Lights</span>
+                            </div>
+                            <div class="device-item on">
+                                <i class="fas fa-tv"></i>
+                                <span>TV</span>
+                            </div>
+                            <div class="device-item off">
+                                <i class="fas fa-fan"></i>
+                                <span>Fan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-header">
+                            <h3>Kitchen</h3>
+                            <div class="room-status active">Active</div>
+                        </div>
+                        <div class="room-stats">
+                            <div class="stat">
+                                <i class="fas fa-bolt"></i>
+                                <span>120 kWh</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>26°C</span>
+                            </div>
+                        </div>
+                        <div class="room-devices">
+                            <div class="device-item on">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Lights</span>
+                            </div>
+                            <div class="device-item on">
+                                <i class="fas fa-blender"></i>
+                                <span>Mixer</span>
+                            </div>
+                            <div class="device-item off">
+                                <i class="fas fa-utensils"></i>
+                                <span>Oven</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-header">
+                            <h3>Bedroom</h3>
+                            <div class="room-status inactive">Inactive</div>
+                        </div>
+                        <div class="room-stats">
+                            <div class="stat">
+                                <i class="fas fa-bolt"></i>
+                                <span>45 kWh</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>23°C</span>
+                            </div>
+                        </div>
+                        <div class="room-devices">
+                            <div class="device-item off">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Lights</span>
+                            </div>
+                            <div class="device-item off">
+                                <i class="fas fa-fan"></i>
+                                <span>Fan</span>
+                            </div>
+                            <div class="device-item off">
+                                <i class="fas fa-tv"></i>
+                                <span>TV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appliances Section -->
+            <section id="appliances" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Appliance Management</h2>
+                </div>
+                <div class="appliances-grid">
+                    <div class="appliance-card">
+                        <div class="appliance-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <div class="appliance-info">
+                            <h3>Television</h3>
+                            <p>Living Room</p>
+                            <div class="usage-info">
+                                <span>42 kWh</span>
+                                <span>₹336</span>
+                            </div>
+                        </div>
+                        <div class="appliance-controls">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="appliance-card">
+                        <div class="appliance-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="appliance-info">
+                            <h3>Refrigerator</h3>
+                            <p>Kitchen</p>
+                            <div class="usage-info">
+                                <span>85 kWh</span>
+                                <span>₹680</span>
+                            </div>
+                        </div>
+                        <div class="appliance-controls">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="appliance-card">
+                        <div class="appliance-icon">
+                            <i class="fas fa-fan"></i>
+                        </div>
+                        <div class="appliance-info">
+                            <h3>Air Conditioner</h3>
+                            <p>Bedroom</p>
+                            <div class="usage-info">
+                                <span>120 kWh</span>
+                                <span>₹960</span>
+                            </div>
+                        </div>
+                        <div class="appliance-controls">
+                            <label class="switch">
+                                <input type="checkbox">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Energy Reports</h2>
+                    <div class="report-controls">
+                        <select id="report-type">
+                            <option value="usage">Usage Report</option>
+                            <option value="cost">Cost Report</option>
+                            <option value="comparison">Comparison Report</option>
+                        </select>
+                        <button class="btn-primary">Download PDF</button>
+                    </div>
+                </div>
+                <div class="report-content">
+                    <div class="report-chart">
+                        <canvas id="report-chart-canvas"></canvas>
+                    </div>
+                    <div class="report-summary">
+                        <h3>Monthly Summary</h3>
+                        <div class="summary-stats">
+                            <div class="summary-item">
+                                <span class="label">Total Usage</span>
+                                <span class="value">324 kWh</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Total Cost</span>
+                                <span class="value">₹2,592</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Peak Usage Day</span>
+                                <span class="value">June 15</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Lowest Usage Day</span>
+                                <span class="value">June 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Savings Section -->
+            <section id="savings" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Energy Savings</h2>
+                </div>
+                <div class="savings-content">
+                    <div class="savings-summary">
+                        <div class="savings-card">
+                            <div class="savings-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="savings-info">
+                                <h3>Money Saved</h3>
+                                <p class="savings-value">₹3,450</p>
+                                <p class="savings-period">This Year</p>
+                            </div>
+                        </div>
+                        <div class="savings-card">
+                            <div class="savings-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="savings-info">
+                                <h3>Energy Saved</h3>
+                                <p class="savings-value">430 kWh</p>
+                                <p class="savings-period">This Year</p>
+                            </div>
+                        </div>
+                        <div class="savings-card">
+                            <div class="savings-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="savings-info">
+                                <h3>CO₂ Reduced</h3>
+                                <p class="savings-value">215 kg</p>
+                                <p class="savings-period">This Year</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="savings-tips">
+                        <h3>Savings Tips</h3>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Switch to LED Bulbs</h4>
+                                    <p>Replace all incandescent bulbs with LED bulbs to save up to 80% on lighting costs.</p>
+                                </div>
+                            </div>
                             <div class="tip-item">
                                 <div class="tip-icon">
                                     <i class="fas fa-temperature-low"></i>
                                 </div>
                                 <div class="tip-content">
-                                    <h4>Optimize Thermostat Settings</h4>
-                                    <p>Adjusting your thermostat by just 1°C can reduce your heating bill by up to 10%.</p>
-                                    <div class="tip-savings">Potential Savings: $8.50/month</div>
+                                    <h4>Optimize AC Temperature</h4>
+                                    <p>Set your AC to 24°C for optimal comfort and energy efficiency.</p>
                                 </div>
                             </div>
                             <div class="tip-item">
@@ -410,333 +705,127 @@
                                     <i class="fas fa-plug"></i>
                                 </div>
                                 <div class="tip-content">
-                                    <h4>Unplug Standby Devices</h4>
-                                    <p>Devices on standby can account for up to 10% of your home's energy consumption.</p>
-                                    <div class="tip-savings">Potential Savings: $5.25/month</div>
-                                </div>
-                            </div>
-                            <div class="tip-item">
-                                <div class="tip-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Use Off-Peak Hours</h4>
-                                    <p>Running appliances during off-peak hours can save on time-of-use billing plans.</p>
-                                    <div class="tip-savings">Potential Savings: $12.75/month</div>
+                                    <h4>Unplug Idle Devices</h4>
+                                    <p>Unplug devices when not in use to eliminate phantom power consumption.</p>
                                 </div>
                             </div>
                         </div>
-                        <button class="secondary-btn view-all-tips-btn">
-                            <i class="fas fa-list"></i> View All Tips
-                        </button>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Notifications</h2>
+                    <div class="notification-controls">
+                        <button class="btn-secondary">Mark All as Read</button>
+                        <select id="notification-filter">
+                            <option value="all">All Notifications</option>
+                            <option value="unread">Unread</option>
+                            <option value="alerts">Alerts</option>
+                            <option value="tips">Tips</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="notifications-list">
+                    <div class="notification-item unread alert">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h3>Unusual Power Consumption</h3>
+                            <p>Your living room is showing 30% higher power consumption than usual.</p>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="btn-icon"><i class="fas fa-check"></i></button>
+                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="notification-item unread tip">
+                        <div class="notification-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h3>Energy Saving Tip</h3>
+                            <p>Your refrigerator is consuming more power than average. Consider checking the door seal.</p>
+                            <span class="notification-time">5 hours ago</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="btn-icon"><i class="fas fa-check"></i></button>
+                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="notification-item read alert">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h3>Bill Payment Reminder</h3>
+                            <p>Your electricity bill of ₹2,592 is due in 3 days.</p>
+                            <span class="notification-time">1 day ago</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="btn-icon"><i class="fas fa-check"></i></button>
+                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solar Section -->
+            <section id="solar" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Solar Energy</h2>
+                </div>
+                <div class="solar-content">
+                    <div class="solar-summary">
+                        <div class="solar-card">
+                            <div class="solar-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="solar-info">
+                                <h3>Today's Generation</h3>
+                                <p class="solar-value">12.5 kWh</p>
+                                <p class="solar-comparison increase">
+                                    <i class="fas fa-arrow-up"></i> 15% vs yesterday
+                                </p>
+                            </div>
+                        </div>
+                        <div class="solar-card">
+                            <div class="solar-icon">
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                            <div class="solar-info">
+                                <h3>Battery Status</h3>
+                                <p class="solar-value">85%</p>
+                                <p class="solar-detail">Estimated 6 hours backup</p>
+                            </div>
+                        </div>
+                        <div class="solar-card">
+                            <div class="solar-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="solar-info">
+                                <h3>Savings</h3>
+                                <p class="solar-value">₹950</p>
+                                <p class="solar-period">This Month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solar-chart">
+                        <h3>Generation vs Consumption</h3>
+                        <canvas id="solar-chart-canvas"></canvas>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
 
-    <!-- Modals -->
-    <!-- Edit Bill Modal -->
-    <div class="modal" id="editBillModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Edit Bill Details</h3>
-                <button class="modal-close" aria-label="Close modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="editProvider">Provider Name</label>
-                    <input type="text" id="editProvider" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editBillDate">Bill Date</label>
-                    <input type="date" id="editBillDate" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editBillNumber">Bill Number</label>
-                    <input type="text" id="editBillNumber" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editBillingPeriodStart">Billing Period Start</label>
-                    <input type="date" id="editBillingPeriodStart" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editBillingPeriodEnd">Billing Period End</label>
-                    <input type="date" id="editBillingPeriodEnd" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editDueDate">Due Date</label>
-                    <input type="date" id="editDueDate" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editCustomerId">Customer ID</label>
-                    <input type="text" id="editCustomerId" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editTotalUnits">Total Units (kWh)</label>
-                    <input type="number" id="editTotalUnits" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="editRatePerUnit">Rate per Unit ($)</label>
-                    <input type="number" id="editRatePerUnit" class="form-control" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="editFixedCharges">Fixed Charges ($)</label>
-                    <input type="number" id="editFixedCharges" class="form-control" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="editTaxes">Taxes ($)</label>
-                    <input type="number" id="editTaxes" class="form-control" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="editStatus">Bill Status</label>
-                    <select id="editStatus" class="form-control">
-                        <option value="unpaid">Unpaid</option>
-                        <option value="paid">Paid</option>
-                        <option value="overdue">Overdue</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button class="secondary-btn" id="cancelEdit">Cancel</button>
-                    <button class="primary-btn" id="saveEdit">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- View Bill Modal -->
-    <div class="modal" id="viewBillModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Bill Details</h3>
-                <button class="modal-close" aria-label="Close modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="bill-view-header">
-                    <div class="bill-view-logo">
-                        <i class="fas fa-bolt"></i> Energy Provider
-                    </div>
-                    <div class="bill-view-title">Electricity Bill</div>
-                </div>
-                <div class="bill-view-info">
-                    <div class="bill-view-section">
-                        <h4>Customer Information</h4>
-                        <div class="bill-view-grid">
-                            <div class="bill-view-item">
-                                <span class="view-label">Name</span>
-                                <span class="view-value">John Doe</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Account Number</span>
-                                <span class="view-value">1234567890</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Address</span>
-                                <span class="view-value">123 Energy St, Powertown</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Meter Number</span>
-                                <span class="view-value">E-12345</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bill-view-section">
-                        <h4>Billing Information</h4>
-                        <div class="bill-view-grid">
-                            <div class="bill-view-item">
-                                <span class="view-label">Bill Number</span>
-                                <span class="view-value">INV-20230630</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Bill Date</span>
-                                <span class="view-value">30/06/2023</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Billing Period</span>
-                                <span class="view-value">01/06/2023 - 30/06/2023</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Due Date</span>
-                                <span class="view-value">15/07/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bill-view-section">
-                        <h4>Consumption Details</h4>
-                        <div class="bill-view-grid">
-                            <div class="bill-view-item">
-                                <span class="view-label">Previous Reading</span>
-                                <span class="view-value">5240 kWh</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Current Reading</span>
-                                <span class="view-value">5560 kWh</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Units Consumed</span>
-                                <span class="view-value">320 kWh</span>
-                            </div>
-                            <div class="bill-view-item">
-                                <span class="view-label">Rate per Unit</span>
-                                <span class="view-value">$0.18</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bill-view-section">
-                        <h4>Charges Breakdown</h4>
-                        <div class="bill-view-charges">
-                            <div class="charge-item">
-                                <span class="charge-description">Energy Charges (320 kWh @ $0.18)</span>
-                                <span class="charge-amount">$57.60</span>
-                            </div>
-                            <div class="charge-item">
-                                <span class="charge-description">Fixed Charges</span>
-                                <span class="charge-amount">$12.50</span>
-                            </div>
-                            <div class="charge-item">
-                                <span class="charge-description">Taxes (10%)</span>
-                                <span class="charge-amount">$8.35</span>
-                            </div>
-                            <div class="charge-total">
-                                <span class="total-description">Total Amount</span>
-                                <span class="total-amount">$78.45</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bill-view-footer">
-                    <div class="bill-view-message">
-                        Thank you for using our services. For any queries, please contact our customer support.
-                    </div>
-                    <div class="bill-view-actions">
-                        <button class="secondary-btn" id="downloadBill">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                        <button class="primary-btn" id="printBill">
-                            <i class="fas fa-print"></i> Print
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Accessibility Menu -->
-    <div class="accessibility-menu">
-        <div class="accessibility-header">
-            <h3>Accessibility Options</h3>
-            <button class="accessibility-close" aria-label="Close accessibility menu">&times;</button>
-        </div>
-        <div class="accessibility-options">
-            <div class="accessibility-option">
-                <label for="highContrast" class="toggle-switch">
-                    <input type="checkbox" id="highContrast">
-                    <span class="toggle-slider"></span>
-                    <span class="toggle-label">High Contrast</span>
-                </label>
-            </div>
-            <div class="accessibility-option">
-                <label for="largeText" class="toggle-switch">
-                    <input type="checkbox" id="largeText">
-                    <span class="toggle-slider"></span>
-                    <span class="toggle-label">Large Text</span>
-                </label>
-            </div>
-            <div class="accessibility-option">
-                <label for="reduceMotion" class="toggle-switch">
-                    <input type="checkbox" id="reduceMotion">
-                    <span class="toggle-slider"></span>
-                    <span class="toggle-label">Reduce Motion</span>
-                </label>
-            </div>
-            <div class="accessibility-option">
-                <label for="screenReader" class="toggle-switch">
-                    <input type="checkbox" id="screenReader">
-                    <span class="toggle-slider"></span>
-                    <span class="toggle-label">Screen Reader Support</span>
-                </label>
-            </div>
-        </div>
-        <div class="language-selector">
-            <label for="language">Language</label>
-            <select id="language" class="form-control">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="zh">中文</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Notification Container -->
-    <div class="notification-container" id="notificationContainer"></div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <img src="images/logo.svg" alt="EnergyWise Logo">
-                        <span>EnergyWise</span>
-                    </div>
-                    <p>Smart energy management solution to help you save money and reduce your carbon footprint.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="impact.html">Impact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="support.html">Support</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="feedback.html">Feedback</a></li>
-                    </ul>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Get the App</h4>
-                    <div class="app-links">
-                        <a href="#" aria-label="Download on the App Store">
-                            <img src="https://via.placeholder.com/150x40?text=App+Store" alt="App Store">
-                        </a>
-                        <a href="#" aria-label="Get it on Google Play">
-                            <img src="https://via.placeholder.com/150x40?text=Google+Play" alt="Google Play">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 EnergyWise. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
+    <script src="fix-blue-screen.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/bills.js"></script>
-    <script src="js/accessibility.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/fix-blue-section.js"></script>
 </body>
 </html>
