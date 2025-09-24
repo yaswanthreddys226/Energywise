@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCB Mapping - Energy Wise</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/mcb-mapping.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.svg" alt="Energy Wise Logo">
+                <h1>Energy Wise</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span>Welcome, Rahul</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown">
+                    <ul>
+                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-home"></i> Overview</a>
+                    </li>
+                    <li>
+                        <a href="rooms.html"><i class="fas fa-door-open"></i> Rooms</a>
+                    </li>
+                    <li>
+                        <a href="appliances.html"><i class="fas fa-plug"></i> Appliances</a>
+                    </li>
+                    <li>
+                        <a href="bills.html"><i class="fas fa-file-invoice"></i> Bills</a>
+                    </li>
+                    <li class="active">
+                        <a href="mcb-mapping.html"><i class="fas fa-project-diagram"></i> MCB Mapping</a>
+                    </li>
+                    <li>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                    </li>
+                    <li>
+                        <a href="savings.html"><i class="fas fa-piggy-bank"></i> Savings</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li>
+                        <a href="solar.html"><i class="fas fa-sun"></i> Solar</a>
+                    </li>
+                    <li>
+                        <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="accessibility-controls">
+                    <button onclick="toggleHighContrast()" title="Toggle High Contrast">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                    <button onclick="toggleLargeText()" title="Toggle Large Text">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button onclick="toggleLanguage()" title="Change Language">
+                        <i class="fas fa-language"></i>
+                    </button>
+                </div>
+                <div class="help-support">
+                    <a href="support.html" title="Help & Support">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="dashboard-content">
+            <section id="mcb-mapping" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>MCB Mapping</h2>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="save-mapping"><i class="fas fa-save"></i> Save Mapping</button>
+                        <button class="btn btn-outline" id="reset-mapping"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </div>
+
+                <div class="mcb-container">
+                    <div class="mcb-panel">
+                        <div class="panel-header">
+                            <h3>MCB Distribution Panel</h3>
+                            <p>Drag switches to map them to rooms and appliances</p>
+                        </div>
+                        <div class="mcb-box">
+                            <div class="mcb-main-switch">
+                                <div class="switch-label">Main Switch</div>
+                                <div class="switch" data-switch="main">
+                                    <div class="switch-toggle"></div>
+                                </div>
+                            </div>
+                            <div class="mcb-switches">
+                                <div class="mcb-switch" draggable="true" data-switch="1">
+                                    <div class="switch-number">1</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="2">
+                                    <div class="switch-number">2</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="3">
+                                    <div class="switch-number">3</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="4">
+                                    <div class="switch-number">4</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="5">
+                                    <div class="switch-number">5</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="6">
+                                    <div class="switch-number">6</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="7">
+                                    <div class="switch-number">7</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                                <div class="mcb-switch" draggable="true" data-switch="8">
+                                    <div class="switch-number">8</div>
+                                    <div class="switch">
+                                        <div class="switch-toggle"></div>
+                                    </div>
+                                    <div class="switch-label">Unknown</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mcb-instructions">
+                            <h4>How to Map Your MCB</h4>
+                            <ol>
+                                <li>Turn off one MCB switch at a time</li>
+                                <li>Note which appliances or rooms lose power</li>
+                                <li>Drag the switch to the corresponding room or appliance</li>
+                                <li>Save your mapping when complete</li>
+                            </ol>
+                            <div class="safety-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Safety Warning: Be cautious when working with electrical panels. If you're unsure, consult a professional electrician.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mapping-area">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="rooms">Rooms</button>
+                            <button class="tab-btn" data-tab="appliances">Appliances</button>
+                        </div>
+
+                        <div class="tab-content active" id="rooms-tab">
+                            <div class="room-cards">
+                                <div class="room-card" data-room="living-room">
+                                    <div class="room-icon">
+                                        <i class="fas fa-couch"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Living Room</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="room-card" data-room="kitchen">
+                                    <div class="room-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Kitchen</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="room-card" data-room="master-bedroom">
+                                    <div class="room-icon">
+                                        <i class="fas fa-bed"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Master Bedroom</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="room-card" data-room="kids-bedroom">
+                                    <div class="room-icon">
+                                        <i class="fas fa-child"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Kids Bedroom</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="room-card" data-room="bathroom">
+                                    <div class="room-icon">
+                                        <i class="fas fa-bath"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Bathroom</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="room-card add-room">
+                                    <div class="room-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="room-info">
+                                        <h4>Add Room</h4>
+                                        <p>Create a new room</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="appliances-tab">
+                            <div class="appliance-cards">
+                                <div class="appliance-card" data-appliance="air-conditioner">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-snowflake"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Air Conditioner</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="appliance-card" data-appliance="refrigerator">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-temperature-low"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Refrigerator</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="appliance-card" data-appliance="water-heater">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-hot-tub"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Water Heater</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="appliance-card" data-appliance="washing-machine">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-tshirt"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Washing Machine</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="appliance-card" data-appliance="television">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-tv"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Television</h4>
+                                        <p>Drop MCB switch here</p>
+                                    </div>
+                                    <div class="mapped-switches"></div>
+                                </div>
+                                <div class="appliance-card add-appliance">
+                                    <div class="appliance-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="appliance-info">
+                                        <h4>Add Appliance</h4>
+                                        <p>Create a new appliance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mapping-summary">
+                    <div class="section-header">
+                        <h3>Mapping Summary</h3>
+                        <button class="btn btn-outline" id="export-mapping"><i class="fas fa-download"></i> Export</button>
+                    </div>
+                    <div class="summary-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>MCB Switch</th>
+                                    <th>Mapped To</th>
+                                    <th>Type</th>
+                                    <th>Power Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- This will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Room/Appliance Modal -->
+    <div class="modal" id="add-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Room</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-form">
+                    <div class="form-group">
+                        <label for="item-name">Name</label>
+                        <input type="text" id="item-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-icon">Icon</label>
+                        <select id="item-icon">
+                            <option value="fas fa-door-open">Door</option>
+                            <option value="fas fa-couch">Couch</option>
+                            <option value="fas fa-bed">Bed</option>
+                            <option value="fas fa-utensils">Kitchen</option>
+                            <option value="fas fa-bath">Bathroom</option>
+                            <option value="fas fa-laptop">Office</option>
+                            <option value="fas fa-book">Study</option>
+                            <option value="fas fa-dumbbell">Gym</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-outline cancel-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/mcb-mapping.js"></script>
+</body>
+</html>

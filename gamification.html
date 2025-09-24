@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnergyWise - Gamification & Rewards</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gamification.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="EnergyWise Logo">
+                    <span>EnergyWise</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="simulation.html">Simulation</a></li>
+                    <li><a href="gamification.html" class="active">Rewards</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+            <div class="user-menu">
+                <div class="points-display">
+                    <i class="fas fa-star"></i>
+                    <span id="user-points">0</span> points
+                </div>
+                <div class="user-profile">
+                    <img src="images/avatar.svg" alt="User Avatar">
+                    <span>Level <span id="user-level">1</span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero gamification-hero">
+            <div class="container">
+                <h1>Rewards & Achievements</h1>
+                <p>Track your progress, earn badges, and compete with your community to save energy and reduce your carbon footprint.</p>
+            </div>
+        </section>
+
+        <section class="gamification-dashboard">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <!-- User Profile Card -->
+                    <div class="card profile-card">
+                        <div class="card-header">
+                            <h2>Your Profile</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-info">
+                                <div class="profile-avatar">
+                                    <img src="images/avatar.svg" alt="User Avatar">
+                                </div>
+                                <div class="profile-details">
+                                    <h3>Energy Hero</h3>
+                                    <div class="level-info">
+                                        <p>Level <span id="user-level-display">1</span></p>
+                                        <div class="level-progress">
+                                            <div class="progress-bar">
+                                                <div id="level-progress-bar" class="progress-fill" style="width: 25%"></div>
+                                            </div>
+                                            <span>25% to Level 2</span>
+                                        </div>
+                                    </div>
+                                    <div class="streak-info">
+                                        <i class="fas fa-fire"></i>
+                                        <span id="current-streak">0</span> day streak
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-star"></i>
+                                    <div class="stat-value"><span id="total-points">0</span></div>
+                                    <div class="stat-label">Total Points</div>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-trophy"></i>
+                                    <div class="stat-value"><span id="badges-count">0</span></div>
+                                    <div class="stat-label">Badges</div>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <div class="stat-value"><span id="challenges-completed">0</span></div>
+                                    <div class="stat-label">Challenges</div>
+                                </div>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-primary"><i class="fas fa-share-alt"></i> Share Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Card -->
+                    <div class="card leaderboard-card">
+                        <div class="card-header">
+                            <h2>Leaderboard</h2>
+                            <div class="card-actions">
+                                <select id="leaderboard-type">
+                                    <option value="neighborhood">Neighborhood</option>
+                                    <option value="city">City-wide</option>
+                                    <option value="friends">Friends</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="leaderboard-tabs">
+                                <button class="leaderboard-tab active" data-tab="monthly">Monthly</button>
+                                <button class="leaderboard-tab" data-tab="all-time">All Time</button>
+                                <button class="leaderboard-tab" data-tab="savings">Savings</button>
+                            </div>
+                            <div class="leaderboard-content">
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>User</th>
+                                            <th>Points</th>
+                                            <th>Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="highlighted">
+                                            <td>4</td>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="images/avatar.svg" alt="Your Avatar">
+                                                    <span>You</span>
+                                                </div>
+                                            </td>
+                                            <td>1,250</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="images/avatar1.svg" alt="User Avatar">
+                                                    <span>EcoWarrior</span>
+                                                </div>
+                                            </td>
+                                            <td>2,450</td>
+                                            <td>8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="images/avatar2.svg" alt="User Avatar">
+                                                    <span>GreenThumb</span>
+                                                </div>
+                                            </td>
+                                            <td>2,100</td>
+                                            <td>7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="images/avatar3.svg" alt="User Avatar">
+                                                    <span>PowerSaver</span>
+                                                </div>
+                                            </td>
+                                            <td>1,850</td>
+                                            <td>6</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="images/avatar4.svg" alt="User Avatar">
+                                                    <span>EnergyNinja</span>
+                                                </div>
+                                            </td>
+                                            <td>1,100</td>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Impact Card -->
+                    <div class="card impact-card">
+                        <div class="card-header">
+                            <h2>Your Environmental Impact</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="impact-stats">
+                                <div class="impact-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <div class="impact-value"><span id="energy-saved">0</span> kWh</div>
+                                    <div class="impact-label">Energy Saved</div>
+                                </div>
+                                <div class="impact-item">
+                                    <i class="fas fa-cloud"></i>
+                                    <div class="impact-value"><span id="co2-reduced">0</span> kg</div>
+                                    <div class="impact-label">CO₂ Reduced</div>
+                                </div>
+                                <div class="impact-item">
+                                    <i class="fas fa-tree"></i>
+                                    <div class="impact-value"><span id="trees-equivalent">0</span></div>
+                                    <div class="impact-label">Trees Equivalent</div>
+                                </div>
+                            </div>
+                            <div class="impact-chart-container">
+                                <canvas id="impact-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges Card -->
+                    <div class="card badges-card">
+                        <div class="card-header">
+                            <h2>Your Badges</h2>
+                            <div class="card-actions">
+                                <select id="badge-filter">
+                                    <option value="all">All Badges</option>
+                                    <option value="earned">Earned</option>
+                                    <option value="locked">Locked</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="badges-container" class="badges-grid">
+                                <!-- Badges will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Challenges Card -->
+                    <div class="card challenges-card">
+                        <div class="card-header">
+                            <h2>Active Challenges</h2>
+                        </div>
+                        <div class="card-body">
+                            <div id="active-challenges" class="challenges-list">
+                                <!-- Active challenges will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Challenges Card -->
+                    <div class="card completed-challenges-card">
+                        <div class="card-header">
+                            <h2>Completed Challenges</h2>
+                        </div>
+                        <div class="card-body">
+                            <div id="completed-challenges" class="challenges-list">
+                                <!-- Completed challenges will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kids Mode Card -->
+                    <div class="card kids-mode">
+                        <div class="card-header">
+                            <h2>Kids Mode</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="kids-mode-content">
+                                <img src="images/kids-mode.svg" alt="Kids Mode">
+                                <p>Make learning about energy conservation fun for children with interactive games and simplified challenges.</p>
+                                <button class="btn-primary">Launch Kids Mode</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="EnergyWise Logo">
+                    <h3>EnergyWise</h3>
+                    <p>Smart energy management for a sustainable future</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                        <li><a href="gamification.html">Rewards</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Energy Saving Tips</a></li>
+                        <li><a href="#">Appliance Guides</a></li>
+                        <li><a href="#">Sustainability Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest energy saving tips and updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 EnergyWise. All rights reserved.</p>
+                </div>
+                <div class="footer-accessibility">
+                    <button id="accessibility-toggle">
+                        <i class="fas fa-universal-access"></i>
+                        Accessibility
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Accessibility Menu (Hidden by default) -->
+    <div id="accessibility-menu" class="accessibility-menu">
+        <div class="accessibility-header">
+            <h3>Accessibility Options</h3>
+            <button id="close-accessibility">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="accessibility-options">
+            <div class="option-item">
+                <label for="high-contrast-toggle">High Contrast</label>
+                <button id="high-contrast-toggle" class="toggle-button">
+                    <span class="toggle-slider"></span>
+                </button>
+            </div>
+            <div class="option-item">
+                <label for="large-text-toggle">Large Text</label>
+                <button id="large-text-toggle" class="toggle-button">
+                    <span class="toggle-slider"></span>
+                </button>
+            </div>
+            <div class="option-item">
+                <label for="voice-assist-toggle">Voice Assistant</label>
+                <button id="voice-assist-toggle" class="toggle-button">
+                    <span class="toggle-slider"></span>
+                </button>
+            </div>
+            <div class="option-item">
+                <label for="language-select">Language</label>
+                <select id="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                    <option value="bn">Bengali</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/accessibility.js"></script>
+</body>
+</html>

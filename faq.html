@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Energy Wise</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-leaf"></i>
+                    <span>Energy Wise</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a></li>
+                    <li><a href="simulation.html"><i class="fas fa-chart-line"></i> Simulation</a></li>
+                    <li><a href="gamification.html"><i class="fas fa-trophy"></i> Rewards</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="faq.html" class="active"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container">
+        <section class="page-header">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about energy conservation and using Energy Wise.</p>
+        </section>
+
+        <section class="faq-section">
+            <div class="faq-search">
+                <input type="text" id="faq-search-input" placeholder="Search questions...">
+                <button id="faq-search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="general">General</button>
+                <button class="category-btn" data-category="bills">Bills & Analysis</button>
+                <button class="category-btn" data-category="simulation">Simulation</button>
+                <button class="category-btn" data-category="rewards">Rewards</button>
+                <button class="category-btn" data-category="account">Account</button>
+            </div>
+
+            <div class="faq-list">
+                <!-- General Questions -->
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h3>What is Energy Wise?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Energy Wise is a comprehensive platform designed to help households understand, track, and reduce their energy consumption. Our tools include bill analysis, energy usage simulation, personalized recommendations, and gamification features to make energy conservation engaging and rewarding.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h3>Is Energy Wise free to use?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Energy Wise is completely free for individual households. We offer premium features for businesses and organizations that require advanced analytics and reporting capabilities.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h3>How can Energy Wise help me save money?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Energy Wise helps you save money by:</p>
+                        <ul>
+                            <li>Analyzing your energy bills to identify patterns and anomalies</li>
+                            <li>Simulating different usage scenarios to find optimal energy consumption habits</li>
+                            <li>Providing personalized recommendations based on your specific household profile</li>
+                            <li>Tracking your progress over time and showing your savings</li>
+                            <li>Educating you about energy-efficient practices and technologies</li>
+                        </ul>
+                        <p>Users typically see a 10-20% reduction in their energy bills within the first three months of consistent use.</p>
+                    </div>
+                </div>
+
+                <!-- Bills & Analysis Questions -->
+                <div class="faq-item" data-category="bills">
+                    <div class="faq-question">
+                        <h3>How do I upload my energy bill?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can upload your energy bill by:</p>
+                        <ol>
+                            <li>Going to the "Bills" section in the navigation menu</li>
+                            <li>Clicking on the "Upload Bill" button</li>
+                            <li>Either dragging and dropping your bill file (PDF or image) or clicking to browse your files</li>
+                            <li>Confirming the upload and waiting for our system to analyze it</li>
+                        </ol>
+                        <p>Our OCR technology will automatically extract relevant information from your bill, but you can also manually input data if needed.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="bills">
+                    <div class="faq-question">
+                        <h3>What types of bills can Energy Wise analyze?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Energy Wise can analyze electricity, gas, and water bills from most major providers. Our system is constantly being updated to recognize new bill formats. If your bill format isn't recognized, you can still manually input the data, and we'll work on adding support for that format in future updates.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="bills">
+                    <div class="faq-question">
+                        <h3>Is my bill data secure?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we take data security very seriously. All bill data is encrypted both in transit and at rest. We only extract the necessary information for analysis and don't store sensitive personal information like your payment details. You can delete your bill data at any time from your account settings.</p>
+                    </div>
+                </div>
+
+                <!-- Simulation Questions -->
+                <div class="faq-item" data-category="simulation">
+                    <div class="faq-question">
+                        <h3>How accurate is the energy simulation?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our energy simulation is based on real-world data and sophisticated models that account for various factors including appliance efficiency, usage patterns, seasonal variations, and local energy rates. While no simulation can be 100% accurate, our models typically achieve 85-95% accuracy when compared to actual energy consumption. The more information you provide about your household and usage patterns, the more accurate the simulation becomes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="simulation">
+                    <div class="faq-question">
+                        <h3>Can I simulate solar panel installation?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our simulation tool allows you to model the impact of installing solar panels on your energy consumption and bills. You can specify the size of the system, orientation, and other parameters to get a realistic estimate of potential savings and payback period. We also provide information about available incentives and rebates in your area.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="simulation">
+                    <div class="faq-question">
+                        <h3>How do I create different household profiles?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To create different household profiles in the simulation:</p>
+                        <ol>
+                            <li>Go to the "Simulation" page</li>
+                            <li>Click on "Household Profiles" in the control panel</li>
+                            <li>Select "Create New Profile"</li>
+                            <li>Enter details about household size, home type, appliances, and usage patterns</li>
+                            <li>Save the profile with a descriptive name</li>
+                        </ol>
+                        <p>You can create multiple profiles to compare different scenarios or track changes in your household over time.</p>
+                    </div>
+                </div>
+
+                <!-- Rewards Questions -->
+                <div class="faq-item" data-category="rewards">
+                    <div class="faq-question">
+                        <h3>How do I earn points and badges?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can earn points and badges by:</p>
+                        <ul>
+                            <li>Regularly uploading and analyzing your energy bills</li>
+                            <li>Completing challenges (daily, weekly, and monthly)</li>
+                            <li>Reducing your energy consumption compared to previous periods</li>
+                            <li>Implementing recommended energy-saving measures</li>
+                            <li>Participating in community events and competitions</li>
+                            <li>Sharing your achievements on social media</li>
+                            <li>Referring friends and family to Energy Wise</li>
+                        </ul>
+                        <p>Different actions earn different point values, and accumulating points unlocks new badges and achievement levels.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="rewards">
+                    <div class="faq-question">
+                        <h3>Can I redeem my points for real rewards?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, depending on your location, you may be able to redeem your points for various rewards including:</p>
+                        <ul>
+                            <li>Discounts on energy-efficient appliances and products</li>
+                            <li>Gift cards from partner retailers</li>
+                            <li>Donations to environmental causes</li>
+                            <li>Entries into monthly prize drawings</li>
+                        </ul>
+                        <p>Visit the "Rewards" section to see what's available in your area.</p>
+                    </div>
+                </div>
+
+                <!-- Account Questions -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>How do I change my account settings?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To change your account settings:</p>
+                        <ol>
+                            <li>Click on your profile icon in the top right corner</li>
+                            <li>Select "Account Settings" from the dropdown menu</li>
+                            <li>Here you can update your profile information, change your password, manage notification preferences, and adjust privacy settings</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <h3>Can I delete my account and data?</h3>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you have full control over your account and data. To delete your account:</p>
+                        <ol>
+                            <li>Go to Account Settings</li>
+                            <li>Scroll to the bottom and click on "Delete Account"</li>
+                            <li>Confirm your decision</li>
+                        </ol>
+                        <p>This will permanently delete all your personal information, bill data, and usage history from our systems. Please note that this action cannot be undone.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-not-found" style="display: none;">
+                <p>No matching questions found. Try a different search term or <a href="contact.html">contact us</a> with your specific question.</p>
+            </div>
+        </section>
+
+        <section class="contact-cta">
+            <h2>Still have questions?</h2>
+            <p>Our support team is ready to help you with any questions or concerns you may have.</p>
+            <a href="contact.html" class="primary-btn">Contact Us</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Energy Wise</h3>
+                    <p>Empowering households to understand and reduce their energy consumption through smart analysis and engaging tools.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="bills.html">Bills</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                        <li><a href="gamification.html">Rewards</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Energy Wise. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Accessibility Menu -->
+    <div class="accessibility-container">
+        <button class="accessibility-toggle" aria-label="Accessibility Options">
+            <i class="fas fa-universal-access"></i>
+        </button>
+        <div class="accessibility-menu">
+            <div class="accessibility-header">
+                <h3>Accessibility Options</h3>
+            </div>
+            <div class="accessibility-content">
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-adjust"></i>
+                    </div>
+                    <div class="control-label">High Contrast</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="high-contrast-toggle" class="accessibility-toggle-input">
+                        <label for="high-contrast-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <div class="control-label">Large Text</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="large-text-toggle" class="accessibility-toggle-input">
+                        <label for="large-text-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-stop-circle"></i>
+                    </div>
+                    <div class="control-label">Reduce Motion</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="reduce-motion-toggle" class="accessibility-toggle-input">
+                        <label for="reduce-motion-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-audio-description"></i>
+                    </div>
+                    <div class="control-label">Screen Reader Support</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="screen-reader-toggle" class="accessibility-toggle-input">
+                        <label for="screen-reader-toggle"></label>
+                    </div>
+                </div>
+                <div class="language-selector-container">
+                    <label for="language-selector">Language</label>
+                    <select id="language-selector">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="zh">中文</option>
+                        <option value="ja">日本語</option>
+                        <option value="ar">العربية</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+        // FAQ functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle FAQ answers
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.toggle-icon i');
+                    
+                    // Toggle answer visibility
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                });
+            });
+
+            // Category filtering
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter FAQ items
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Reset search
+                    document.getElementById('faq-search-input').value = '';
+                    document.querySelector('.faq-not-found').style.display = 'none';
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('faq-search-input');
+            const searchBtn = document.getElementById('faq-search-btn');
+            const notFoundMessage = document.querySelector('.faq-not-found');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                let resultsFound = false;
+                
+                if (searchTerm.trim() === '') {
+                    // If search is empty, show all based on current category filter
+                    const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+                    faqItems.forEach(item => {
+                        if (activeCategory === 'all' || item.getAttribute('data-category') === activeCategory) {
+                            item.style.display = 'block';
+                            resultsFound = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Search in questions and answers
+                    faqItems.forEach(item => {
+                        const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                        
+                        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                            item.style.display = 'block';
+                            resultsFound = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Show/hide not found message
+                notFoundMessage.style.display = resultsFound ? 'none' : 'block';
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

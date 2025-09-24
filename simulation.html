@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Simulation - Energy Wise</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/simulation.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-leaf"></i>
+                    <span>Energy Wise</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a></li>
+                    <li><a href="simulation.html" class="active"><i class="fas fa-chart-line"></i> Simulation</a></li>
+                    <li><a href="gamification.html"><i class="fas fa-trophy"></i> Rewards</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="impact.html"><i class="fas fa-globe-americas"></i> Impact</a></li>
+                    <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container">
+        <section class="page-header">
+            <h1>Energy Simulation</h1>
+            <p>Simulate your household energy usage and discover ways to save</p>
+        </section>
+
+        <div class="simulation-layout">
+            <!-- Simulation Controls -->
+            <section class="simulation-controls">
+                <div class="card">
+                    <h2>Household Profile</h2>
+                    <div class="form-group">
+                        <label for="household-size">Household Size</label>
+                        <select id="household-size" class="form-control">
+                            <option value="1">1 person</option>
+                            <option value="2" selected>2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5">5+ people</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="home-type">Home Type</label>
+                        <select id="home-type" class="form-control">
+                            <option value="apartment">Apartment</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="detached" selected>Detached House</option>
+                            <option value="condo">Condominium</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="home-size">Home Size (sq ft)</label>
+                        <input type="range" id="home-size" class="form-control" min="500" max="3500" step="100" value="1800">
+                        <div class="range-value"><span id="home-size-value">1800</span> sq ft</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="insulation-quality">Insulation Quality</label>
+                        <select id="insulation-quality" class="form-control">
+                            <option value="poor">Poor</option>
+                            <option value="average" selected>Average</option>
+                            <option value="good">Good</option>
+                            <option value="excellent">Excellent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Simulation Settings</h2>
+                    <div class="form-group">
+                        <label for="simulation-duration">Simulation Duration</label>
+                        <select id="simulation-duration" class="form-control">
+                            <option value="day">1 Day</option>
+                            <option value="week" selected>1 Week</option>
+                            <option value="month">1 Month</option>
+                            <option value="year">1 Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="season">Season</label>
+                        <select id="season" class="form-control">
+                            <option value="winter">Winter</option>
+                            <option value="spring">Spring</option>
+                            <option value="summer" selected>Summer</option>
+                            <option value="fall">Fall</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select id="location" class="form-control">
+                            <option value="northeast">Northeast US</option>
+                            <option value="southeast">Southeast US</option>
+                            <option value="midwest" selected>Midwest US</option>
+                            <option value="southwest">Southwest US</option>
+                            <option value="west">West US</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="electricity-rate">Electricity Rate (¢/kWh)</label>
+                        <input type="number" id="electricity-rate" class="form-control" min="5" max="50" step="0.1" value="13.5">
+                    </div>
+                </div>
+
+                <div class="simulation-actions">
+                    <button id="run-simulation" class="primary-btn">
+                        <i class="fas fa-play"></i> Run Simulation
+                    </button>
+                    <button id="save-preset" class="secondary-btn">
+                        <i class="fas fa-save"></i> Save Preset
+                    </button>
+                    <button id="load-preset" class="secondary-btn">
+                        <i class="fas fa-folder-open"></i> Load Preset
+                    </button>
+                </div>
+            </section>
+
+            <!-- Simulation Results -->
+            <section class="simulation-results">
+                <div class="card">
+                    <h2>Energy Consumption</h2>
+                    <div class="chart-container">
+                        <canvas id="energy-chart"></canvas>
+                    </div>
+                    <div class="results-summary">
+                        <div class="result-item">
+                            <div class="result-label">Total Energy</div>
+                            <div class="result-value" id="total-energy">0 kWh</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Estimated Cost</div>
+                            <div class="result-value" id="estimated-cost">$0.00</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">CO₂ Emissions</div>
+                            <div class="result-value" id="co2-emissions">0 kg</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Energy Breakdown</h2>
+                    <div class="chart-container">
+                        <canvas id="breakdown-chart"></canvas>
+                    </div>
+                    <div class="breakdown-legend" id="breakdown-legend">
+                        <!-- Legend items will be added dynamically -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Comparison</h2>
+                    <div class="comparison-container">
+                        <div class="comparison-item">
+                            <div class="comparison-label">vs. Similar Homes</div>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" id="similar-homes-comparison" style="width: 50%"></div>
+                            </div>
+                            <div class="comparison-value" id="similar-homes-value">0% difference</div>
+                        </div>
+                        <div class="comparison-item">
+                            <div class="comparison-label">vs. Energy Efficient Homes</div>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" id="efficient-homes-comparison" style="width: 70%"></div>
+                            </div>
+                            <div class="comparison-value" id="efficient-homes-value">0% difference</div>
+                        </div>
+                        <div class="comparison-item">
+                            <div class="comparison-label">vs. Your Previous Usage</div>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" id="previous-usage-comparison" style="width: 60%"></div>
+                            </div>
+                            <div class="comparison-value" id="previous-usage-value">0% difference</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appliance Controls -->
+            <section class="appliance-controls">
+                <div class="card">
+                    <h2>Appliance Usage</h2>
+                    <div class="appliance-list" id="appliance-list">
+                        <div class="appliance-item">
+                            <div class="appliance-header">
+                                <div class="appliance-name">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <span>HVAC System</span>
+                                </div>
+                                <div class="appliance-toggle">
+                                    <input type="checkbox" id="hvac-toggle" class="toggle-input" checked>
+                                    <label for="hvac-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="appliance-details">
+                                <div class="appliance-settings">
+                                    <div class="form-group">
+                                        <label for="hvac-temp">Temperature (°F)</label>
+                                        <input type="range" id="hvac-temp" min="65" max="85" value="72" class="form-control">
+                                        <div class="range-value"><span id="hvac-temp-value">72</span>°F</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hvac-hours">Hours per day</label>
+                                        <input type="range" id="hvac-hours" min="0" max="24" value="8" class="form-control">
+                                        <div class="range-value"><span id="hvac-hours-value">8</span> hours</div>
+                                    </div>
+                                </div>
+                                <div class="appliance-energy">
+                                    <div class="energy-label">Est. Energy:</div>
+                                    <div class="energy-value" id="hvac-energy">0 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="appliance-item">
+                            <div class="appliance-header">
+                                <div class="appliance-name">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Refrigerator</span>
+                                </div>
+                                <div class="appliance-toggle">
+                                    <input type="checkbox" id="fridge-toggle" class="toggle-input" checked>
+                                    <label for="fridge-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="appliance-details">
+                                <div class="appliance-settings">
+                                    <div class="form-group">
+                                        <label for="fridge-type">Type</label>
+                                        <select id="fridge-type" class="form-control">
+                                            <option value="standard">Standard</option>
+                                            <option value="energystar" selected>Energy Star</option>
+                                            <option value="old">Older Model</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="appliance-energy">
+                                    <div class="energy-label">Est. Energy:</div>
+                                    <div class="energy-value" id="fridge-energy">0 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="appliance-item">
+                            <div class="appliance-header">
+                                <div class="appliance-name">
+                                    <i class="fas fa-tv"></i>
+                                    <span>Television & Electronics</span>
+                                </div>
+                                <div class="appliance-toggle">
+                                    <input type="checkbox" id="tv-toggle" class="toggle-input" checked>
+                                    <label for="tv-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="appliance-details">
+                                <div class="appliance-settings">
+                                    <div class="form-group">
+                                        <label for="tv-hours">Hours per day</label>
+                                        <input type="range" id="tv-hours" min="0" max="24" value="4" class="form-control">
+                                        <div class="range-value"><span id="tv-hours-value">4</span> hours</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tv-standby">Standby Mode</label>
+                                        <select id="tv-standby" class="form-control">
+                                            <option value="off">Turn Off When Not In Use</option>
+                                            <option value="on" selected>Leave On Standby</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="appliance-energy">
+                                    <div class="energy-label">Est. Energy:</div>
+                                    <div class="energy-value" id="tv-energy">0 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="appliance-item">
+                            <div class="appliance-header">
+                                <div class="appliance-name">
+                                    <i class="fas fa-tshirt"></i>
+                                    <span>Washer & Dryer</span>
+                                </div>
+                                <div class="appliance-toggle">
+                                    <input type="checkbox" id="laundry-toggle" class="toggle-input" checked>
+                                    <label for="laundry-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="appliance-details">
+                                <div class="appliance-settings">
+                                    <div class="form-group">
+                                        <label for="laundry-loads">Loads per week</label>
+                                        <input type="range" id="laundry-loads" min="0" max="14" value="3" class="form-control">
+                                        <div class="range-value"><span id="laundry-loads-value">3</span> loads</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="laundry-temp">Water Temperature</label>
+                                        <select id="laundry-temp" class="form-control">
+                                            <option value="cold">Cold</option>
+                                            <option value="warm" selected>Warm</option>
+                                            <option value="hot">Hot</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="appliance-energy">
+                                    <div class="energy-label">Est. Energy:</div>
+                                    <div class="energy-value" id="laundry-energy">0 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="appliance-item">
+                            <div class="appliance-header">
+                                <div class="appliance-name">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Lighting</span>
+                                </div>
+                                <div class="appliance-toggle">
+                                    <input type="checkbox" id="lighting-toggle" class="toggle-input" checked>
+                                    <label for="lighting-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="appliance-details">
+                                <div class="appliance-settings">
+                                    <div class="form-group">
+                                        <label for="lighting-type">Bulb Type</label>
+                                        <select id="lighting-type" class="form-control">
+                                            <option value="incandescent">Incandescent</option>
+                                            <option value="cfl">CFL</option>
+                                            <option value="led" selected>LED</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lighting-hours">Hours per day</label>
+                                        <input type="range" id="lighting-hours" min="0" max="24" value="5" class="form-control">
+                                        <div class="range-value"><span id="lighting-hours-value">5</span> hours</div>
+                                    </div>
+                                </div>
+                                <div class="appliance-energy">
+                                    <div class="energy-label">Est. Energy:</div>
+                                    <div class="energy-value" id="lighting-energy">0 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="add-appliance" class="secondary-btn">
+                            <i class="fas fa-plus"></i> Add Custom Appliance
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations -->
+            <section class="recommendations">
+                <div class="card">
+                    <h2>Energy Saving Recommendations</h2>
+                    <div class="recommendations-list" id="recommendations-list">
+                        <!-- Recommendations will be added dynamically -->
+                        <div class="recommendation-placeholder">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Run the simulation to get personalized recommendations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Potential Savings</h2>
+                    <div class="savings-summary">
+                        <div class="savings-item">
+                            <div class="savings-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="savings-value" id="energy-savings">0 kWh</div>
+                            <div class="savings-label">Energy Savings</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="savings-value" id="cost-savings">$0.00</div>
+                            <div class="savings-label">Cost Savings</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="savings-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="savings-value" id="co2-savings">0 kg</div>
+                            <div class="savings-label">CO₂ Reduction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="simulation-actions">
+                    <button id="export-results" class="primary-btn">
+                        <i class="fas fa-file-export"></i> Export Results
+                    </button>
+                    <button id="share-results" class="secondary-btn">
+                        <i class="fas fa-share-alt"></i> Share Results
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="preset-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save/Load Presets</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="preset-tabs">
+                    <button class="preset-tab active" data-tab="save">Save Preset</button>
+                    <button class="preset-tab" data-tab="load">Load Preset</button>
+                </div>
+                <div class="preset-content" id="save-preset-content">
+                    <div class="form-group">
+                        <label for="preset-name">Preset Name</label>
+                        <input type="text" id="preset-name" class="form-control" placeholder="e.g., Summer Weekday">
+                    </div>
+                    <div class="form-group">
+                        <label for="preset-description">Description (optional)</label>
+                        <textarea id="preset-description" class="form-control" placeholder="Add notes about this preset"></textarea>
+                    </div>
+                    <button id="save-preset-confirm" class="primary-btn">Save Preset</button>
+                </div>
+                <div class="preset-content" id="load-preset-content" style="display: none;">
+                    <div class="preset-list" id="preset-list">
+                        <!-- Presets will be added dynamically -->
+                        <div class="preset-item">
+                            <div class="preset-info">
+                                <h4>Summer Weekday</h4>
+                                <p>Typical summer day with AC usage</p>
+                            </div>
+                            <div class="preset-actions">
+                                <button class="load-preset-btn" data-preset="preset1">Load</button>
+                                <button class="delete-preset-btn" data-preset="preset1">Delete</button>
+                            </div>
+                        </div>
+                        <div class="preset-item">
+                            <div class="preset-info">
+                                <h4>Winter Weekend</h4>
+                                <p>Weekend in winter with heating</p>
+                            </div>
+                            <div class="preset-actions">
+                                <button class="load-preset-btn" data-preset="preset2">Load</button>
+                                <button class="delete-preset-btn" data-preset="preset2">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="custom-appliance-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Custom Appliance</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="custom-appliance-name">Appliance Name</label>
+                    <input type="text" id="custom-appliance-name" class="form-control" placeholder="e.g., Dishwasher">
+                </div>
+                <div class="form-group">
+                    <label for="custom-appliance-power">Power Consumption (Watts)</label>
+                    <input type="number" id="custom-appliance-power" class="form-control" min="1" placeholder="e.g., 1200">
+                </div>
+                <div class="form-group">
+                    <label for="custom-appliance-hours">Hours of Use per Day</label>
+                    <input type="number" id="custom-appliance-hours" class="form-control" min="0" max="24" step="0.1" placeholder="e.g., 1.5">
+                </div>
+                <div class="form-group">
+                    <label for="custom-appliance-days">Days of Use per Week</label>
+                    <input type="number" id="custom-appliance-days" class="form-control" min="0" max="7" placeholder="e.g., 3">
+                </div>
+                <button id="add-custom-appliance-confirm" class="primary-btn">Add Appliance</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="export-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export Simulation Results</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <div class="export-option">
+                        <input type="radio" id="export-pdf" name="export-format" value="pdf" checked>
+                        <label for="export-pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF Report</span>
+                        </label>
+                    </div>
+                    <div class="export-option">
+                        <input type="radio" id="export-csv" name="export-format" value="csv">
+                        <label for="export-csv">
+                            <i class="fas fa-file-csv"></i>
+                            <span>CSV Data</span>
+                        </label>
+                    </div>
+                    <div class="export-option">
+                        <input type="radio" id="export-image" name="export-format" value="image">
+                        <label for="export-image">
+                            <i class="fas fa-file-image"></i>
+                            <span>Image</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="export-include-recommendations">
+                        <input type="checkbox" id="export-include-recommendations" checked>
+                        Include Recommendations
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="export-include-comparison">
+                        <input type="checkbox" id="export-include-comparison" checked>
+                        Include Comparison Data
+                    </label>
+                </div>
+                <button id="export-confirm" class="primary-btn">Export</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Your Results</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="share-options">
+                    <button class="share-option" data-platform="email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </button>
+                    <button class="share-option" data-platform="facebook">
+                        <i class="fab fa-facebook"></i>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-option" data-platform="twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-option" data-platform="linkedin">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="share-link">Direct Link</label>
+                    <div class="share-link-container">
+                        <input type="text" id="share-link" class="form-control" value="https://energywise.com/s/abc123" readonly>
+                        <button id="copy-link" class="secondary-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div class="notification-container" id="notification-container">
+        <!-- Notifications will be added dynamically -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Energy Wise</h3>
+                    <p>Empowering households to understand and reduce their energy consumption through smart analysis and engaging tools.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="bills.html">Bills</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                        <li><a href="gamification.html">Rewards</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="impact.html">Impact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Energy Wise. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Accessibility Menu -->
+    <div class="accessibility-container">
+        <button class="accessibility-toggle" aria-label="Accessibility Options">
+            <i class="fas fa-universal-access"></i>
+        </button>
+        <div class="accessibility-menu">
+            <div class="accessibility-header">
+                <h3>Accessibility Options</h3>
+            </div>
+            <div class="accessibility-content">
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-adjust"></i>
+                    </div>
+                    <div class="control-label">High Contrast</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="high-contrast-toggle" class="accessibility-toggle-input">
+                        <label for="high-contrast-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <div class="control-label">Large Text</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="large-text-toggle" class="accessibility-toggle-input">
+                        <label for="large-text-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-stop-circle"></i>
+                    </div>
+                    <div class="control-label">Reduce Motion</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="reduce-motion-toggle" class="accessibility-toggle-input">
+                        <label for="reduce-motion-toggle"></label>
+                    </div>
+                </div>
+                <div class="accessibility-control">
+                    <div class="control-icon">
+                        <i class="fas fa-audio-description"></i>
+                    </div>
+                    <div class="control-label">Screen Reader Support</div>
+                    <div class="control-toggle">
+                        <input type="checkbox" id="screen-reader-toggle" class="accessibility-toggle-input">
+                        <label for="screen-reader-toggle"></label>
+                    </div>
+                </div>
+                <div class="language-selector-container">
+                    <label for="language-selector">Language</label>
+                    <select id="language-selector">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="zh">中文</option>
+                        <option value="ja">日本語</option>
+                        <option value="ar">العربية</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/simulation.js"></script>
+</body>
+</html>
