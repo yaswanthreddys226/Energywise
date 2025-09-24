@@ -1,0 +1,888 @@
+/* Bill Management Specific Styles */
+:root {
+    --upload-bg: #f8f9fa;
+    --upload-border: #dee2e6;
+    --upload-hover: #e9ecef;
+    --processing-bg: #f1f8ff;
+    --results-bg: #ffffff;
+    --confidence-high: #28a745;
+    --confidence-medium: #ffc107;
+    --confidence-low: #dc3545;
+    --status-paid: #28a745;
+    --status-pending: #ffc107;
+    --status-disputed: #dc3545;
+    --chart-bg: #ffffff;
+    --insight-bg: #f8f9fa;
+    --primary-color: #2ecc71;
+    --primary-rgb: 46, 204, 113;
+    --text-color: #333333;
+    --text-muted: #6c757d;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Main Bills Container */
+.bills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.bills-header {
+    margin-bottom: 2rem;
+}
+
+.bills-header h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.bills-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Bill Upload Area */
+.bill-upload-area {
+    margin-bottom: 2.5rem;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.upload-container {
+    background-color: var(--upload-bg);
+    border: 2px dashed var(--upload-border);
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-container:hover, .upload-container.drag-over {
+    background-color: var(--upload-hover);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.upload-icon {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.upload-container:hover .upload-icon {
+    transform: scale(1.1);
+}
+
+.upload-container h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.upload-container p {
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.supported-formats {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem !important;
+    color: var(--text-muted);
+    background-color: rgba(0, 0, 0, 0.03);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+/* OCR Processing Container */
+.ocr-processing-container {
+    display: none;
+    background-color: var(--processing-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--box-shadow);
+}
+
+.processing-animation {
+    margin-bottom: 2rem;
+}
+
+.spinner {
+    width: 70px;
+    height: 70px;
+    border: 6px solid rgba(var(--primary-rgb), 0.2);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.progress-bar-container {
+    width: 100%;
+    max-width: 500px;
+    height: 12px;
+    background-color: rgba(var(--primary-rgb), 0.15);
+    border-radius: 6px;
+    margin: 0 auto 0.75rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 6px;
+}
+
+.progress-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* OCR Results Container */
+.ocr-results-container {
+    display: none;
+    background-color: var(--results-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2.5rem;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--upload-border);
+    padding-bottom: 1rem;
+}
+
+.results-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
+.accuracy-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.accuracy-indicator span {
+    margin-right: 0.75rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.accuracy-meter {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accuracy-meter.high {
+    background-color: var(--confidence-high);
+}
+
+.accuracy-meter.medium {
+    background-color: var(--confidence-medium);
+    color: #212529;
+}
+
+.accuracy-meter.low {
+    background-color: var(--confidence-low);
+}
+
+.bill-preview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .bill-preview {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.bill-image {
+    background-color: var(--upload-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    height: fit-content;
+}
+
+.bill-image img {
+    max-width: 100%;
+    max-height: 550px;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.extracted-data {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.extracted-data h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    border-bottom: 1px solid var(--upload-border);
+    padding-bottom: 0.75rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--upload-border);
+    border-radius: 8px;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+}
+
+.confidence-indicator {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+.confidence-indicator.high {
+    background-color: var(--confidence-high);
+}
+
+.confidence-indicator.medium {
+    background-color: var(--confidence-medium);
+}
+
+.confidence-indicator.low {
+    background-color: var(--confidence-low);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--upload-border);
+}
+
+@media (max-width: 576px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+/* Bill History */
+.bill-history {
+    margin-top: 4rem;
+    background-color: var(--results-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+}
+
+.bill-history h2 {
+    margin-bottom: 1.75rem;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--upload-border);
+    padding-bottom: 1rem;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.search-box {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.85rem 2.5rem 0.85rem 1.1rem;
+    border: 1px solid var(--upload-border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+#year-filter {
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--upload-border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#year-filter:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+}
+
+.bills-table-container {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.bills-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.bills-table th, .bills-table td {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--upload-border);
+}
+
+.bills-table th {
+    background-color: var(--upload-bg);
+    font-weight: 600;
+    color: var(--text-color);
+    position: sticky;
+    top: 0;
+}
+
+.bills-table tr:last-child td {
+    border-bottom: none;
+}
+
+.bills-table tr {
+    transition: all 0.2s ease;
+}
+
+.bills-table tr:hover {
+    background-color: var(--upload-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-badge.paid {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--status-paid);
+}
+
+.status-badge.paid::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-paid);
+    margin-right: 0.5rem;
+}
+
+.status-badge.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--status-pending);
+}
+
+.status-badge.pending::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-pending);
+    margin-right: 0.5rem;
+}
+
+.status-badge.disputed {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--status-disputed);
+}
+
+.status-badge.disputed::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-disputed);
+    margin-right: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.action-btn:hover {
+    color: var(--primary-dark);
+    transform: scale(1.15);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.pagination-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+    color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.page-numbers {
+    display: flex;
+    margin: 0 1rem;
+}
+
+.page-number {
+    background: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-number:hover {
+    background-color: var(--upload-hover);
+    transform: scale(1.1);
+}
+
+.page-number.active {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 6px rgba(var(--primary-rgb), 0.3);
+}
+
+/* Bill Comparison */
+.bill-comparison {
+    background-color: var(--results-bg);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+#comparison-type {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--upload-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: white;
+}
+
+.comparison-chart-container {
+    background-color: var(--chart-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    height: 300px;
+}
+
+.comparison-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.insight-card {
+    background-color: var(--insight-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.insight-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(var(--primary-rgb), 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.insight-icon i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.insight-content h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.insight-content p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content.large {
+    max-width: 900px;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--upload-border);
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+    color: var(--danger-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--upload-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.file-upload-container {
+    display: flex;
+    align-items: center;
+}
+
+.file-name {
+    margin-left: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Bill View Modal */
+.bill-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .bill-details-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bill-image-container {
+    text-align: center;
+}
+
+.bill-full-image {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.image-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--upload-bg);
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: var(--upload-hover);
+    color: var(--primary-color);
+}
+
+.bill-detail-section {
+    margin-bottom: 1.5rem;
+}
+
+.bill-detail-section h4 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--upload-border);
+    padding-bottom: 0.5rem;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 0.75rem;
+}
+
+.detail-label {
+    width: 40%;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.detail-value {
+    width: 60%;
+    color: var(--text-color);
+}
+
+.detail-row.total {
+    margin-top: 1rem;
+    font-weight: 600;
+    border-top: 1px solid var(--upload-border);
+    padding-top: 0.75rem;
+}
+
+/* Accessibility styles */
+.high-contrast-mode .upload-container,
+.high-contrast-mode .ocr-processing-container,
+.high-contrast-mode .ocr-results-container,
+.high-contrast-mode .bill-history,
+.high-contrast-mode .bill-comparison,
+.high-contrast-mode .modal-content {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.high-contrast-mode .bills-table th {
+    background-color: #333;
+    color: #fff;
+}
+
+.high-contrast-mode .bills-table td {
+    border-bottom: 1px solid #555;
+}
+
+.high-contrast-mode .form-group input,
+.high-contrast-mode .form-group select,
+.high-contrast-mode textarea {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.large-text-mode {
+    font-size: 1.2rem;
+}
+
+.large-text-mode h2 {
+    font-size: 2.2rem;
+}
+
+.large-text-mode h3 {
+    font-size: 1.8rem;
+}
+
+.large-text-mode h4 {
+    font-size: 1.5rem;
+}
+
+.large-text-mode .form-group label,
+.large-text-mode .detail-label,
+.large-text-mode .detail-value {
+    font-size: 1.1rem;
+}

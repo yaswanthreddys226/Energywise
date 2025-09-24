@@ -1,0 +1,479 @@
+/**
+ * Energy Wise - Accessibility Styles
+ * This stylesheet contains styles for accessibility features
+ */
+
+/* Accessibility Menu */
+.accessibility-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.accessibility-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color, #2e7d32);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.accessibility-toggle:hover {
+    background-color: var(--primary-dark, #005005);
+}
+
+.accessibility-toggle:focus {
+    outline: 3px solid var(--accent-color, #ff9800);
+    outline-offset: 2px;
+}
+
+.accessibility-menu {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: none;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform: translateY(10px);
+    opacity: 0;
+}
+
+.accessibility-menu.active {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.accessibility-header {
+    padding: 15px;
+    background-color: var(--primary-color, #2e7d32);
+    color: white;
+}
+
+.accessibility-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.accessibility-content {
+    padding: 15px;
+}
+
+.accessibility-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.accessibility-control:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.control-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: var(--primary-color, #2e7d32);
+}
+
+.control-label {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.control-toggle {
+    position: relative;
+    width: 40px;
+    height: 20px;
+}
+
+.control-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.control-toggle label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.control-toggle label:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.control-toggle input:checked + label {
+    background-color: var(--primary-color, #2e7d32);
+}
+
+.control-toggle input:checked + label:before {
+    transform: translateX(20px);
+}
+
+.control-toggle input:focus + label {
+    box-shadow: 0 0 0 2px var(--accent-color, #ff9800);
+}
+
+.language-selector-container {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.language-selector-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--text-secondary, #757575);
+}
+
+#language-selector {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+#language-selector:focus {
+    outline: 2px solid var(--primary-color, #2e7d32);
+    border-color: var(--primary-color, #2e7d32);
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+    --primary-color: #006400;
+    --primary-light: #00a000;
+    --primary-dark: #004d00;
+    --secondary-color: #0000cd;
+    --secondary-light: #0000ff;
+    --secondary-dark: #00008b;
+    --accent-color: #b8860b;
+    --accent-light: #daa520;
+    --accent-dark: #8b6914;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --background-color: #ffffff;
+    --card-color: #f8f8f8;
+    --border-color: #000000;
+}
+
+.high-contrast .main-header,
+.high-contrast .main-footer {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.high-contrast .main-nav a {
+    color: #ffffff;
+}
+
+.high-contrast .main-nav a.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.high-contrast a {
+    color: #0000ee;
+}
+
+.high-contrast a:visited {
+    color: #551a8b;
+}
+
+.high-contrast button {
+    border: 2px solid #000000;
+}
+
+.high-contrast .card,
+.high-contrast .control-card {
+    border: 2px solid #000000;
+    background-color: #ffffff;
+}
+
+.high-contrast .primary-btn {
+    background-color: #006400;
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+.high-contrast .secondary-btn {
+    background-color: #0000cd;
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+.high-contrast .outline-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+}
+
+.high-contrast .danger-btn {
+    background-color: #8b0000;
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+.high-contrast .chart-controls button.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.high-contrast .usage-bar {
+    background-color: #dddddd;
+    border: 1px solid #000000;
+}
+
+.high-contrast .usage-fill {
+    background-color: #006400;
+}
+
+.high-contrast .recommendation-card {
+    border: 2px solid #000000;
+}
+
+.high-contrast .modal-content {
+    border: 2px solid #000000;
+}
+
+/* Large Text Mode */
+.large-text {
+    font-size: 1.2rem;
+}
+
+.large-text h1 {
+    font-size: 2.4rem;
+}
+
+.large-text h2 {
+    font-size: 2rem;
+}
+
+.large-text h3 {
+    font-size: 1.6rem;
+}
+
+.large-text h4 {
+    font-size: 1.4rem;
+}
+
+.large-text .control-group label,
+.large-text .form-group label {
+    font-size: 1.2rem;
+}
+
+.large-text .control-group select,
+.large-text .control-group input,
+.large-text .form-group select,
+.large-text .form-group input {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+}
+
+.large-text button {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+}
+
+.large-text .result-value {
+    font-size: 1.5rem;
+}
+
+.large-text .result-subtext {
+    font-size: 1rem;
+}
+
+.large-text .chart-controls button {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.large-text .recommendation-content h4 {
+    font-size: 1.3rem;
+}
+
+.large-text .recommendation-content p {
+    font-size: 1.1rem;
+}
+
+.large-text .recommendation-stats span {
+    font-size: 1rem;
+}
+
+.large-text .accessibility-control .control-label {
+    font-size: 1.1rem;
+}
+
+.large-text .language-selector-container label {
+    font-size: 1.1rem;
+}
+
+.large-text #language-selector {
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+/* Reduced Motion */
+.reduced-motion * {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+}
+
+.reduced-motion .status-indicator {
+    animation: none !important;
+}
+
+.reduced-motion .notification {
+    animation: none !important;
+}
+
+.reduced-motion .accessibility-menu {
+    transition: none !important;
+}
+
+/* Focus Indicators */
+.focus-visible:focus {
+    outline: 3px solid var(--accent-color, #ff9800);
+    outline-offset: 2px;
+}
+
+/* Screen Reader Mode Enhancements */
+.screen-reader-mode button:not([aria-label]):not([title]) {
+    position: relative;
+}
+
+.screen-reader-mode button:not([aria-label]):not([title])::after {
+    content: attr(class);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.screen-reader-mode img:not([alt]) {
+    position: relative;
+}
+
+.screen-reader-mode img:not([alt])::after {
+    content: "Image";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Keyboard Navigation Indicators */
+body:not(.using-mouse) *:focus {
+    outline: 3px solid var(--accent-color, #ff9800) !important;
+    outline-offset: 2px !important;
+}
+
+/* Responsive Adjustments for Accessibility Menu */
+@media (max-width: 768px) {
+    .accessibility-menu {
+        width: 250px;
+    }
+    
+    .accessibility-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-container {
+        bottom: 15px;
+        left: 15px;
+    }
+    
+    .accessibility-menu {
+        width: 230px;
+    }
+    
+    .accessibility-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Skip to Content Link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color, #2e7d32);
+    color: white;
+    padding: 8px 15px;
+    z-index: 1001;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Keyboard Navigation Detection */
+body.using-mouse :focus {
+    outline: none !important;
+}
