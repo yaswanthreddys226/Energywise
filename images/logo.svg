@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#e8f5e9" />
+  
+  <!-- Leaf Shape -->
+  <path d="M100,30 C140,30 160,70 160,110 C160,150 130,170 100,170 C70,170 40,150 40,110 C40,70 60,30 100,30 Z" fill="#2e7d32" />
+  
+  <!-- Lightning Bolt -->
+  <path d="M100,50 L70,100 L90,105 L80,150 L120,95 L100,90 Z" fill="#ffffff" />
+  
+  <!-- House Outline -->
+  <path d="M100,65 L75,85 L75,115 L125,115 L125,85 Z" fill="none" stroke="#ffffff" stroke-width="3" />
+  
+  <!-- Solar Panel -->
+  <rect x="85" y="95" width="30" height="20" fill="#ff6f00" />
+  <line x1="85" y1="100" x2="115" y2="100" stroke="#ffffff" stroke-width="1" />
+  <line x1="85" y1="105" x2="115" y2="105" stroke="#ffffff" stroke-width="1" />
+  <line x1="85" y1="110" x2="115" y2="110" stroke="#ffffff" stroke-width="1" />
+  <line x1="95" y1="95" x2="95" y2="115" stroke="#ffffff" stroke-width="1" />
+  <line x1="105" y1="95" x2="105" y2="115" stroke="#ffffff" stroke-width="1" />
+</svg>
