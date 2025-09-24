@@ -1,825 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Energy Wise</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <title>EnergyWise – Bills</title>
+  <link rel="stylesheet" href="bills.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="images/logo.svg" alt="Energy Wise Logo">
-                <h1>Energy Wise</h1>
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="impact.html">Impact</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-            <div class="user-profile">
-                <div class="user-info">
-                    <span>Welcome, Rahul</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="user-dropdown">
-                    <ul>
-                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
-                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    </ul>
-                </div>
-            </div>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <i class="fa-solid fa-bolt"></i>
+      <span>EnergyWise</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="rooms.html"><i class="fa-solid fa-house"></i> Rooms</a></li>
+      <li><a href="appliances.html"><i class="fa-solid fa-plug"></i> Appliances</a></li>
+      <li class="active"><a href="bills.html"><i class="fa-solid fa-file-invoice-dollar"></i> Bills</a></li>
+      <li><a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a></li>
+      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Bills</h1>
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <img src="user.png" alt="User">
+          <span>John Doe</span>
+          <i class="fa-solid fa-caret-down"></i>
         </div>
+        <div class="user-dropdown">
+          <ul>
+            <li><i class="fa-solid fa-user"></i> Profile</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+            <li><i class="fa-solid fa-right-from-bracket"></i> Logout</li>
+          </ul>
+        </div>
+      </div>
     </header>
 
-    <!-- Dashboard Main Content -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="active" data-tab="overview">
-                        <a href="javascript:void(0)"><i class="fas fa-home"></i> Overview</a>
-                    </li>
-                    <li data-tab="rooms">
-                        <a href="javascript:void(0)"><i class="fas fa-door-open"></i> Rooms</a>
-                    </li>
-                    <li data-tab="appliances">
-                        <a href="javascript:void(0)"><i class="fas fa-plug"></i> Appliances</a>
-                    </li>
-                    <li data-tab="bills">
-                        <a href="bills.html"><i class="fas fa-file-invoice"></i> Bills</a>
-                    </li>
-                    <li data-tab="mcb-mapping">
-                        <a href="mcb-mapping.html"><i class="fas fa-project-diagram"></i> MCB Mapping</a>
-                    </li>
-                    <li data-tab="reports">
-                        <a href="javascript:void(0)"><i class="fas fa-chart-bar"></i> Reports</a>
-                    </li>
-                    <li data-tab="savings">
-                        <a href="javascript:void(0)"><i class="fas fa-piggy-bank"></i> Savings</a>
-                    </li>
-                    <li data-tab="notifications">
-                        <a href="javascript:void(0)"><i class="fas fa-bell"></i> Notifications</a>
-                    </li>
-                    <li data-tab="solar">
-                        <a href="javascript:void(0)"><i class="fas fa-sun"></i> Solar</a>
-                    </li>
-                    <li data-tab="community">
-                        <a href="community.html"><i class="fas fa-users"></i> Community</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="accessibility-controls">
-                    <button onclick="toggleHighContrast()" title="Toggle High Contrast">
-                        <i class="fas fa-adjust"></i>
-                    </button>
-                    <button onclick="toggleLargeText()" title="Toggle Large Text">
-                        <i class="fas fa-text-height"></i>
-                    </button>
-                    <button onclick="toggleLanguage()" title="Change Language">
-                        <i class="fas fa-language"></i>
-                    </button>
-                </div>
-                <div class="help-support">
-                    <a href="support.html" title="Help & Support">
-                        <i class="fas fa-question-circle"></i>
-                    </a>
-                </div>
-            </div>
-        </aside>
+    <section class="bills-section">
+      <div class="bills-header">
+        <h2>Bill Management</h2>
+        <button class="btn-add"><i class="fa-solid fa-plus"></i> Add Bill</button>
+      </div>
 
-        <!-- Main Dashboard Content -->
-        <main class="dashboard-content">
-            <!-- Overview Section -->
-            <section id="overview" class="dashboard-section active">
-                <div class="section-header">
-                    <h2>Dashboard Overview</h2>
-                    <div class="date-filter">
-                        <select id="time-period">
-                            <option value="daily">Daily</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly" selected>Monthly</option>
-                            <option value="yearly">Yearly</option>
-                        </select>
-                    </div>
-                </div>
+      <div class="bills-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Units Consumed</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Due Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>August 2025</td>
+              <td>320 kWh</td>
+              <td>₹2,450</td>
+              <td><span class="status pending">Pending</span></td>
+              <td>10 Sep 2025</td>
+              <td>
+                <button class="btn-pay"><i class="fa-solid fa-credit-card"></i> Pay</button>
+                <button class="btn-view"><i class="fa-solid fa-eye"></i> View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>July 2025</td>
+              <td>295 kWh</td>
+              <td>₹2,260</td>
+              <td><span class="status paid">Paid</span></td>
+              <td>10 Aug 2025</td>
+              <td>
+                <button class="btn-view"><i class="fa-solid fa-eye"></i> View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>June 2025</td>
+              <td>310 kWh</td>
+              <td>₹2,390</td>
+              <td><span class="status overdue">Overdue</span></td>
+              <td>10 Jul 2025</td>
+              <td>
+                <button class="btn-pay"><i class="fa-solid fa-credit-card"></i> Pay</button>
+                <button class="btn-view"><i class="fa-solid fa-eye"></i> View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
-                <!-- Stats Cards -->
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>Total Usage</h3>
-                            <p class="stat-value">324 kWh</p>
-                            <p class="stat-comparison decrease">
-                                <i class="fas fa-arrow-down"></i> 12% vs last month
-                            </p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-rupee-sign"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>Total Cost</h3>
-                            <p class="stat-value">₹2,592</p>
-                            <p class="stat-comparison decrease">
-                                <i class="fas fa-arrow-down"></i> 12% vs last month
-                            </p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>CO₂ Saved</h3>
-                            <p class="stat-value">45 kg</p>
-                            <p class="stat-comparison increase">
-                                <i class="fas fa-arrow-up"></i> 8% vs last month
-                            </p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-piggy-bank"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>Money Saved</h3>
-                            <p class="stat-value">₹350</p>
-                            <p class="stat-comparison increase">
-                                <i class="fas fa-arrow-up"></i> 15% vs last month
-                            </p>
-                        </div>
-                    </div>
-                </div>
+  <script>
+    // Dropdown toggle
+    const userInfo = document.querySelector(".user-info");
+    const dropdown = document.querySelector(".user-dropdown");
+    userInfo.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+    });
+  </script>
 
-                <!-- Usage Chart -->
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Energy Usage Trends</h3>
-                        <div class="chart-controls">
-                            <button class="active" data-chart="usage">Usage</button>
-                            <button data-chart="cost">Cost</button>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="usageChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Room & Appliance Usage -->
-                <div class="usage-breakdown">
-                    <div class="room-usage">
-                        <div class="breakdown-header">
-                            <h3>Room-wise Usage</h3>
-                            <a href="#rooms" class="view-all">View All</a>
-                        </div>
-                        <div class="chart-wrapper">
-                            <canvas id="roomChart"></canvas>
-                        </div>
-                        <div class="top-rooms">
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Living Room</span>
-                                    <span class="item-value">98 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 30%;"></div>
-                                </div>
-                            </div>
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Kitchen</span>
-                                    <span class="item-value">85 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 26%;"></div>
-                                </div>
-                            </div>
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Master Bedroom</span>
-                                    <span class="item-value">72 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 22%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="appliance-usage">
-                        <div class="breakdown-header">
-                            <h3>Appliance-wise Usage</h3>
-                            <a href="#appliances" class="view-all">View All</a>
-                        </div>
-                        <div class="chart-wrapper">
-                            <canvas id="applianceChart"></canvas>
-                        </div>
-                        <div class="top-appliances">
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Air Conditioner</span>
-                                    <span class="item-value">120 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 37%;"></div>
-                                </div>
-                            </div>
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Refrigerator</span>
-                                    <span class="item-value">65 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 20%;"></div>
-                                </div>
-                            </div>
-                            <div class="top-item">
-                                <div class="item-info">
-                                    <span class="item-name">Water Heater</span>
-                                    <span class="item-value">45 kWh</span>
-                                </div>
-                                <div class="item-progress">
-                                    <div class="progress-bar" style="width: 14%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Savings Tips & Alerts -->
-                <div class="tips-alerts">
-                    <div class="savings-tips">
-                        <div class="section-header">
-                            <h3>Personalized Savings Tips</h3>
-                        </div>
-                        <div class="tips-list">
-                            <div class="tip-card">
-                                <div class="tip-icon">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Switch to LED Lighting</h4>
-                                    <p>Replace your living room lights with LED bulbs to save up to ₹120 per month.</p>
-                                    <div class="tip-actions">
-                                        <button class="btn-small">Implement</button>
-                                        <button class="btn-small btn-outline">Dismiss</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tip-card">
-                                <div class="tip-icon">
-                                    <i class="fas fa-snowflake"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Optimize AC Temperature</h4>
-                                    <p>Setting your AC to 24°C instead of 22°C can save up to 15% on cooling costs.</p>
-                                    <div class="tip-actions">
-                                        <button class="btn-small">Implement</button>
-                                        <button class="btn-small btn-outline">Dismiss</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="alerts">
-                        <div class="section-header">
-                            <h3>Recent Alerts</h3>
-                        </div>
-                        <div class="alerts-list">
-                            <div class="alert-card warning">
-                                <div class="alert-icon">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <div class="alert-content">
-                                    <h4>High Usage Detected</h4>
-                                    <p>Your living room AC has been running continuously for 8 hours.</p>
-                                    <span class="alert-time">2 hours ago</span>
-                                </div>
-                            </div>
-                            <div class="alert-card danger">
-                                <div class="alert-icon">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                </div>
-                                <div class="alert-content">
-                                    <h4>Refrigerator Efficiency Issue</h4>
-                                    <p>Your refrigerator is consuming 20% more energy than normal.</p>
-                                    <span class="alert-time">1 day ago</span>
-                                </div>
-                            </div>
-                            <div class="alert-card info">
-                                <div class="alert-icon">
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                                <div class="alert-content">
-                                    <h4>Bill Due Reminder</h4>
-                                    <p>Your electricity bill is due in 3 days.</p>
-                                    <span class="alert-time">2 days ago</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gamification & Leaderboard -->
-                <div class="gamification">
-                    <div class="section-header">
-                        <h3>Energy Saving Achievements</h3>
-                    </div>
-                    <div class="achievements-leaderboard">
-                        <div class="achievements">
-                            <div class="achievement-cards">
-                                <div class="achievement-card">
-                                    <div class="achievement-icon">
-                                        <i class="fas fa-award"></i>
-                                    </div>
-                                    <div class="achievement-info">
-                                        <h4>Energy Saver</h4>
-                                        <p>Reduced energy usage by 10% for 3 consecutive months</p>
-                                    </div>
-                                </div>
-                                <div class="achievement-card locked">
-                                    <div class="achievement-icon">
-                                        <i class="fas fa-medal"></i>
-                                    </div>
-                                    <div class="achievement-info">
-                                        <h4>Solar Champion</h4>
-                                        <p>Generated 50% of your energy from solar for a month</p>
-                                    </div>
-                                </div>
-                                <div class="achievement-card">
-                                    <div class="achievement-icon">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <div class="achievement-info">
-                                        <h4>Bill Master</h4>
-                                        <p>Kept your bill under ₹2,000 for 6 months</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="view-all-achievements">
-                                <a href="#achievements">View All Achievements</a>
-                            </div>
-                        </div>
-                        <div class="leaderboard">
-                            <h4>Neighborhood Leaderboard</h4>
-                            <div class="leaderboard-list">
-                                <div class="leaderboard-item">
-                                    <div class="rank">1</div>
-                                    <div class="user-avatar">
-                                        <img src="images/avatar-1.svg" alt="User Avatar">
-                                    </div>
-                                    <div class="user-name">Patel Family</div>
-                                    <div class="score">92 points</div>
-                                </div>
-                                <div class="leaderboard-item current-user">
-                                    <div class="rank">2</div>
-                                    <div class="user-avatar">
-                                        <img src="images/avatar-2.svg" alt="User Avatar">
-                                    </div>
-                                    <div class="user-name">Sharma Family</div>
-                                    <div class="score">87 points</div>
-                                </div>
-                                <div class="leaderboard-item">
-                                    <div class="rank">3</div>
-                                    <div class="user-avatar">
-                                        <img src="images/avatar-3.svg" alt="User Avatar">
-                                    </div>
-                                    <div class="user-name">Reddy Family</div>
-                                    <div class="score">81 points</div>
-                                </div>
-                                <div class="leaderboard-item">
-                                    <div class="rank">4</div>
-                                    <div class="user-avatar">
-                                        <img src="images/avatar-4.svg" alt="User Avatar">
-                                    </div>
-                                    <div class="user-name">Singh Family</div>
-                                    <div class="score">75 points</div>
-                                </div>
-                                <div class="leaderboard-item">
-                                    <div class="rank">5</div>
-                                    <div class="user-avatar">
-                                        <img src="images/avatar-5.svg" alt="User Avatar">
-                                    </div>
-                                    <div class="user-name">Kumar Family</div>
-                                    <div class="score">68 points</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Rooms Section -->
-            <section id="rooms" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Room Management</h2>
-                </div>
-                <div class="rooms-grid">
-                    <div class="room-card">
-                        <div class="room-header">
-                            <h3>Living Room</h3>
-                            <div class="room-status active">Active</div>
-                        </div>
-                        <div class="room-stats">
-                            <div class="stat">
-                                <i class="fas fa-bolt"></i>
-                                <span>85 kWh</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-thermometer-half"></i>
-                                <span>24°C</span>
-                            </div>
-                        </div>
-                        <div class="room-devices">
-                            <div class="device-item on">
-                                <i class="fas fa-lightbulb"></i>
-                                <span>Lights</span>
-                            </div>
-                            <div class="device-item on">
-                                <i class="fas fa-tv"></i>
-                                <span>TV</span>
-                            </div>
-                            <div class="device-item off">
-                                <i class="fas fa-fan"></i>
-                                <span>Fan</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="room-card">
-                        <div class="room-header">
-                            <h3>Kitchen</h3>
-                            <div class="room-status active">Active</div>
-                        </div>
-                        <div class="room-stats">
-                            <div class="stat">
-                                <i class="fas fa-bolt"></i>
-                                <span>120 kWh</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-thermometer-half"></i>
-                                <span>26°C</span>
-                            </div>
-                        </div>
-                        <div class="room-devices">
-                            <div class="device-item on">
-                                <i class="fas fa-lightbulb"></i>
-                                <span>Lights</span>
-                            </div>
-                            <div class="device-item on">
-                                <i class="fas fa-blender"></i>
-                                <span>Mixer</span>
-                            </div>
-                            <div class="device-item off">
-                                <i class="fas fa-utensils"></i>
-                                <span>Oven</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="room-card">
-                        <div class="room-header">
-                            <h3>Bedroom</h3>
-                            <div class="room-status inactive">Inactive</div>
-                        </div>
-                        <div class="room-stats">
-                            <div class="stat">
-                                <i class="fas fa-bolt"></i>
-                                <span>45 kWh</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-thermometer-half"></i>
-                                <span>23°C</span>
-                            </div>
-                        </div>
-                        <div class="room-devices">
-                            <div class="device-item off">
-                                <i class="fas fa-lightbulb"></i>
-                                <span>Lights</span>
-                            </div>
-                            <div class="device-item off">
-                                <i class="fas fa-fan"></i>
-                                <span>Fan</span>
-                            </div>
-                            <div class="device-item off">
-                                <i class="fas fa-tv"></i>
-                                <span>TV</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Appliances Section -->
-            <section id="appliances" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Appliance Management</h2>
-                </div>
-                <div class="appliances-grid">
-                    <div class="appliance-card">
-                        <div class="appliance-icon">
-                            <i class="fas fa-tv"></i>
-                        </div>
-                        <div class="appliance-info">
-                            <h3>Television</h3>
-                            <p>Living Room</p>
-                            <div class="usage-info">
-                                <span>42 kWh</span>
-                                <span>₹336</span>
-                            </div>
-                        </div>
-                        <div class="appliance-controls">
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="appliance-card">
-                        <div class="appliance-icon">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <div class="appliance-info">
-                            <h3>Refrigerator</h3>
-                            <p>Kitchen</p>
-                            <div class="usage-info">
-                                <span>85 kWh</span>
-                                <span>₹680</span>
-                            </div>
-                        </div>
-                        <div class="appliance-controls">
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="appliance-card">
-                        <div class="appliance-icon">
-                            <i class="fas fa-fan"></i>
-                        </div>
-                        <div class="appliance-info">
-                            <h3>Air Conditioner</h3>
-                            <p>Bedroom</p>
-                            <div class="usage-info">
-                                <span>120 kWh</span>
-                                <span>₹960</span>
-                            </div>
-                        </div>
-                        <div class="appliance-controls">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Reports Section -->
-            <section id="reports" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Energy Reports</h2>
-                    <div class="report-controls">
-                        <select id="report-type">
-                            <option value="usage">Usage Report</option>
-                            <option value="cost">Cost Report</option>
-                            <option value="comparison">Comparison Report</option>
-                        </select>
-                        <button class="btn-primary">Download PDF</button>
-                    </div>
-                </div>
-                <div class="report-content">
-                    <div class="report-chart">
-                        <canvas id="report-chart-canvas"></canvas>
-                    </div>
-                    <div class="report-summary">
-                        <h3>Monthly Summary</h3>
-                        <div class="summary-stats">
-                            <div class="summary-item">
-                                <span class="label">Total Usage</span>
-                                <span class="value">324 kWh</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Total Cost</span>
-                                <span class="value">₹2,592</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Peak Usage Day</span>
-                                <span class="value">June 15</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Lowest Usage Day</span>
-                                <span class="value">June 5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Savings Section -->
-            <section id="savings" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Energy Savings</h2>
-                </div>
-                <div class="savings-content">
-                    <div class="savings-summary">
-                        <div class="savings-card">
-                            <div class="savings-icon">
-                                <i class="fas fa-rupee-sign"></i>
-                            </div>
-                            <div class="savings-info">
-                                <h3>Money Saved</h3>
-                                <p class="savings-value">₹3,450</p>
-                                <p class="savings-period">This Year</p>
-                            </div>
-                        </div>
-                        <div class="savings-card">
-                            <div class="savings-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="savings-info">
-                                <h3>Energy Saved</h3>
-                                <p class="savings-value">430 kWh</p>
-                                <p class="savings-period">This Year</p>
-                            </div>
-                        </div>
-                        <div class="savings-card">
-                            <div class="savings-icon">
-                                <i class="fas fa-tree"></i>
-                            </div>
-                            <div class="savings-info">
-                                <h3>CO₂ Reduced</h3>
-                                <p class="savings-value">215 kg</p>
-                                <p class="savings-period">This Year</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="savings-tips">
-                        <h3>Savings Tips</h3>
-                        <div class="tip-list">
-                            <div class="tip-item">
-                                <div class="tip-icon">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Switch to LED Bulbs</h4>
-                                    <p>Replace all incandescent bulbs with LED bulbs to save up to 80% on lighting costs.</p>
-                                </div>
-                            </div>
-                            <div class="tip-item">
-                                <div class="tip-icon">
-                                    <i class="fas fa-temperature-low"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Optimize AC Temperature</h4>
-                                    <p>Set your AC to 24°C for optimal comfort and energy efficiency.</p>
-                                </div>
-                            </div>
-                            <div class="tip-item">
-                                <div class="tip-icon">
-                                    <i class="fas fa-plug"></i>
-                                </div>
-                                <div class="tip-content">
-                                    <h4>Unplug Idle Devices</h4>
-                                    <p>Unplug devices when not in use to eliminate phantom power consumption.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Notifications Section -->
-            <section id="notifications" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Notifications</h2>
-                    <div class="notification-controls">
-                        <button class="btn-secondary">Mark All as Read</button>
-                        <select id="notification-filter">
-                            <option value="all">All Notifications</option>
-                            <option value="unread">Unread</option>
-                            <option value="alerts">Alerts</option>
-                            <option value="tips">Tips</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="notifications-list">
-                    <div class="notification-item unread alert">
-                        <div class="notification-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h3>Unusual Power Consumption</h3>
-                            <p>Your living room is showing 30% higher power consumption than usual.</p>
-                            <span class="notification-time">2 hours ago</span>
-                        </div>
-                        <div class="notification-actions">
-                            <button class="btn-icon"><i class="fas fa-check"></i></button>
-                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="notification-item unread tip">
-                        <div class="notification-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h3>Energy Saving Tip</h3>
-                            <p>Your refrigerator is consuming more power than average. Consider checking the door seal.</p>
-                            <span class="notification-time">5 hours ago</span>
-                        </div>
-                        <div class="notification-actions">
-                            <button class="btn-icon"><i class="fas fa-check"></i></button>
-                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="notification-item read alert">
-                        <div class="notification-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h3>Bill Payment Reminder</h3>
-                            <p>Your electricity bill of ₹2,592 is due in 3 days.</p>
-                            <span class="notification-time">1 day ago</span>
-                        </div>
-                        <div class="notification-actions">
-                            <button class="btn-icon"><i class="fas fa-check"></i></button>
-                            <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Solar Section -->
-            <section id="solar" class="dashboard-section">
-                <div class="section-header">
-                    <h2>Solar Energy</h2>
-                </div>
-                <div class="solar-content">
-                    <div class="solar-summary">
-                        <div class="solar-card">
-                            <div class="solar-icon">
-                                <i class="fas fa-sun"></i>
-                            </div>
-                            <div class="solar-info">
-                                <h3>Today's Generation</h3>
-                                <p class="solar-value">12.5 kWh</p>
-                                <p class="solar-comparison increase">
-                                    <i class="fas fa-arrow-up"></i> 15% vs yesterday
-                                </p>
-                            </div>
-                        </div>
-                        <div class="solar-card">
-                            <div class="solar-icon">
-                                <i class="fas fa-battery-three-quarters"></i>
-                            </div>
-                            <div class="solar-info">
-                                <h3>Battery Status</h3>
-                                <p class="solar-value">85%</p>
-                                <p class="solar-detail">Estimated 6 hours backup</p>
-                            </div>
-                        </div>
-                        <div class="solar-card">
-                            <div class="solar-icon">
-                                <i class="fas fa-rupee-sign"></i>
-                            </div>
-                            <div class="solar-info">
-                                <h3>Savings</h3>
-                                <p class="solar-value">₹950</p>
-                                <p class="solar-period">This Month</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="solar-chart">
-                        <h3>Generation vs Consumption</h3>
-                        <canvas id="solar-chart-canvas"></canvas>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="js/main.js"></script>
-    <script src="js/dashboard.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      background: #f8f9fa;
+    }
+    .sidebar {
+      width: 220px;
+      background: #1e1e2d;
+      color: #fff;
+      min-height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px 0;
+    }
+    .sidebar .logo {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    .sidebar .logo i {
+      margin-right: 8px;
+      color: #fdd835;
+    }
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-nav li {
+      padding: 12px 20px;
+    }
+    .sidebar-nav li a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .sidebar-nav li a i {
+      margin-right: 10px;
+    }
+    .sidebar-nav li.active, .sidebar-nav li:hover {
+      background: #27293d;
+    }
+    .main-content {
+      margin-left: 220px;
+      padding: 20px;
+      flex: 1;
+    }
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .user-info img {
+      width: 35px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .user-dropdown {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      display: none;
+    }
+    .user-dropdown.show {
+      display: block;
+    }
+    .user-dropdown ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .user-dropdown li {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .bills-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .bills-table table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    .bills-table th, .bills-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .status.paid { color: green; font-weight: bold; }
+    .status.pending { color: orange; font-weight: bold; }
+    .status.overdue { color: red; font-weight: bold; }
+    .btn-add, .btn-pay, .btn-view {
+      background: #1e88e5;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn-add i, .btn-pay i, .btn-view i {
+      margin-right: 5px;
+    }
+    .btn-pay { background: #43a047; }
+    .btn-view { background: #6c757d; }
+  </style>
 </body>
 </html>
