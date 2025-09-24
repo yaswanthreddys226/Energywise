@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bill Management - EnergyWise</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/bills.css">
     <link rel="stylesheet" href="css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,47 +13,111 @@
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
+    <!-- Header Section -->
+    <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.svg" alt="EnergyWise Logo">
-                    <span>EnergyWise</span>
-                </a>
+                <img src="images/logo.svg" alt="Energy Wise Logo">
+                <h1>Energy Wise</h1>
             </div>
-            <nav class="main-nav">
-                <ul>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="simulation.html">Simulation</a></li>
-                    <li><a href="bills.html" class="active">Bills</a></li>
-                    <li><a href="mcb-mapping.html">MCB Mapping</a></li>
-                    <li><a href="gamification.html">Rewards</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="impact.html">Impact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
-            </nav>
-            <div class="header-actions">
-                <button class="accessibility-toggle" aria-label="Accessibility Options">
-                    <i class="fas fa-universal-access"></i>
-                </button>
-                <button class="notifications-toggle" aria-label="Notifications">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </button>
-                <div class="user-profile">
-                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2ecc71&color=fff" alt="User Profile">
-                    <span>John Doe</span>
-                </div>
-                <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
-                </button>
+                </div>
+            </nav>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span>Welcome, Rahul</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown">
+                    <ul>
+                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="bills-page">
-        <div class="bills-container">
+    <!-- Dashboard Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-home"></i> Overview</a>
+                    </li>
+                    <li>
+                        <a href="rooms.html"><i class="fas fa-door-open"></i> Rooms</a>
+                    </li>
+                    <li>
+                        <a href="appliances.html"><i class="fas fa-plug"></i> Appliances</a>
+                    </li>
+                    <li class="active">
+                        <a href="bills.html"><i class="fas fa-file-invoice"></i> Bills</a>
+                    </li>
+                    <li>
+                        <a href="mcb-mapping.html"><i class="fas fa-sitemap"></i> MCB Mapping</a>
+                    </li>
+                    <li>
+                        <a href="reports.html"><i class="fas fa-chart-pie"></i> Reports</a>
+                    </li>
+                    <li>
+                        <a href="savings.html"><i class="fas fa-piggy-bank"></i> Savings</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li>
+                        <a href="solar.html"><i class="fas fa-sun"></i> Solar</a>
+                    </li>
+                    <li>
+                        <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                    </li>
+                    <li>
+                        <a href="simulation.html"><i class="fas fa-calculator"></i> Simulation</a>
+                    </li>
+                    <li>
+                        <a href="gamification.html"><i class="fas fa-award"></i> Rewards</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="accessibility-controls">
+                    <button onclick="toggleHighContrast()" title="Toggle High Contrast">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                    <button onclick="toggleLargeText()" title="Toggle Large Text">
+                        <i class="fas fa-text-height"></i>
+                    </button>
+                    <button onclick="toggleLanguage()" title="Change Language">
+                        <i class="fas fa-language"></i>
+                    </button>
+                </div>
+                <div class="help-support">
+                    <a href="support.html" title="Help & Support">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="dashboard-content">
+            <section id="bills" class="dashboard-section active">
+                <div class="bills-container">
             <div class="bills-header">
                 <h1>Bill Management</h1>
                 <p>Upload, analyze, and track your energy bills to gain insights and save money</p>
@@ -367,8 +432,9 @@
                     </div>
                 </section>
             </div>
-        </div>
-    </main>
+            </section>
+        </main>
+    </div>
 
     <!-- Modals -->
     <!-- Edit Bill Modal -->
@@ -608,71 +674,62 @@
     <div class="notification-container" id="notificationContainer"></div>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/logo.svg" alt="EnergyWise Logo">
-                    <span>EnergyWise</span>
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="EnergyWise Logo">
+                        <span>EnergyWise</span>
+                    </div>
+                    <p>Smart energy management solution to help you save money and reduce your carbon footprint.</p>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-links-column">
-                        <h4>Navigation</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="dashboard.html">Dashboard</a></li>
-                            <li><a href="simulation.html">Simulation</a></li>
-                            <li><a href="bills.html">Bills</a></li>
-                            <li><a href="mcb-mapping.html">MCB Mapping</a></li>
-                        </ul>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="impact.html">Impact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <div class="footer-links-column">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="impact.html">Environmental Impact</a></li>
-                            <li><a href="gamification.html">Rewards Program</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Cookie Policy</a></li>
-                            <li><a href="#">Data Protection</a></li>
-                            <li><a href="#">Accessibility Statement</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4>Connect</h4>
-                        <div class="social-links">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        </div>
-                        <div class="app-links">
-                            <a href="#" class="app-link">
-                                <i class="fab fa-apple"></i> App Store
-                            </a>
-                            <a href="#" class="app-link">
-                                <i class="fab fa-google-play"></i> Google Play
-                            </a>
-                        </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Get the App</h4>
+                    <div class="app-links">
+                        <a href="#" aria-label="Download on the App Store">
+                            <img src="https://via.placeholder.com/150x40?text=App+Store" alt="App Store">
+                        </a>
+                        <a href="#" aria-label="Get it on Google Play">
+                            <img src="https://via.placeholder.com/150x40?text=Google+Play" alt="Google Play">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2023 EnergyWise. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Sitemap</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Press</a>
-                </div>
             </div>
         </div>
     </footer>
